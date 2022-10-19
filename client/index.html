@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="styesheet" href="./styles.css">
-    <!-- <link rel="shortcut icon" type="image/png" href="pictures/Logo.png"> -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <link rel="shortcut icon" type="image/png" href="../pictures/Logo.png"> -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,17 +10,24 @@
 </head>
 <body>
     <div class="navbar">
-        <!-- <img src="./pictures/Logo.png" class="logo"> -->
-        <h1 style="color: rgb(0, 98, 0);">Bill-it</h1>
+        <img src="../pictures/Logo.png" alt="logo" />
+        <h1 class="appName" style="color: rgb(2, 169, 27);">BILL-IT</h1>
         <ul>
-            <h2 style="color: rgb(0, 98, 0);">Name</h2>
-            <Down-Arrow style="color: rgb(0, 98, 0);">DownArrow</Down-Arrow>
+            <li><a href="#">Name</a></li>
         </ul>
     </div>
 
+    <div class="container">
+        <p class="pieChartTitle">Current Month</p>
+        <svg xmlns="http://www.w3.org/200/svg">
+            <circle cx="400" cy="400" class="donut" r="80" stroke-width="15" stroke="rgb(2, 169, 27)" fill="none"/>
+            <circle cx="400" cy="400" class="donut" r="80" stroke-width="15" stroke="rgb(184, 2, 2)" fill="none"/>
+        </svg>
+    </div>
+
+
 
     
-    <!-- Axios???  -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>
