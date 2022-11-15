@@ -3,14 +3,12 @@
     padding: 0;
     font-family: 'Roboto Mono', monospace;
 }
-
 body{
-    background-color: rgb(53, 53, 53);
+    background-color: rgb(77, 77, 77);
 }
 
 
 /* Logo, Title, Menu */
-
 .navbar{
     width: 85%;
     margin: auto;
@@ -19,20 +17,17 @@ body{
     align-items: center;
     justify-content: space-between;
 }
-
 .navbar ul li{
     list-style: none;
     display: inline-block;
     margin: 0 20px;
     position: relative;
 }
-
 .navbar ul li a{
     text-decoration: none;
     color: rgb(2, 169, 27);
     text-transform: uppercase;
 }
-
 .navbar ul li::after{
     content: "";
     height: 3px;
@@ -49,13 +44,11 @@ body{
 
 
 /* Pie Chart */
-
 :root {
     --pi: 3.14159265459;
     --a1: 60;
     --a2: 40;
 }
-
 .container {
     width: 800px;
     height: 800px;
@@ -64,12 +57,10 @@ body{
     justify-content: center;
     align-items: center;
 }
-
 .pieChartTitle{
     position: absolute;
     color: rgb(2, 169, 27);
 }
-
 svg {
     width: 100%;
     height: 100%;
@@ -77,41 +68,64 @@ svg {
     justify-content: center;
     align-items: center;
 }
-
 @keyframes percent1 {
     to {
         stroke-dasharray: calc(2 * var(--pi) * 300 var(--a1) / 100) calc(2 * var(--pi) * 300 * calc(1 - var(--a1) / 100));
     }
 }
-
 @keyframes percent2 {
     to {
         stroke-dasharray: calc(2 * var(--pi) * 300 var(--a2) / 100) calc(2 * var(--pi) * 300 * calc(1 - var(--a2) / 100));
     }
 }
-
 .donut {
     transform-origin: center center;
     transition: 0.5s ease-in-out;
     stroke-dashoffset: 0;
     cursor: pointer;
 }
-
 .donut:nth-child(1) {
     transform: rotateZ(-90deg);
     animation: percent1 1s ease-in-out forwards;
 }
-
 .donut:nth-child(2) {
     transform: rotateZ(calc(-90deg + calc(var(--a1) * 360deg / 100)));
     animation: percent2 1s ease-in-out forwards;
 }
-
 .donut:nth-child(3) {
     transform: rotateZ(calc(-90deg + calc(var(--a1) * 360deg / 100) + calc(var(--a2) * 360deg / 100)));
     animation: percent3 1s ease-in-out forwards;
 }
-
 .donut:hover {
     stroke-width: 25;
 }
+
+
+/* Bar Chart */
+  /* .chartMenu {
+    width: 100vw;
+    height: 40px;
+    background: #1A1A1A;
+    color: rgb(2, 169, 27);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .chartMenu p {
+    padding: 10px;
+    font-size: 20px;
+  }
+  .chartCard {
+    width: 100vw;
+    height: calc(100vh - 40px);
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .chartBox {
+    width: 80%;
+    padding: 20px;
+    border-radius: 20px;
+    background: white;
+  } */
