@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="statStyles.css" />
     <!-- <link rel="shortcut icon" type="image/png" href="../pictures/Logo.png"> -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,15 +13,16 @@
       <img src="../pictures/Logo.png" alt="logo" />
       <h1 class="appName" style="color: rgb(2, 169, 27)">BILL-IT</h1>
       <ul>
-        <li><a href="#">Statistics</a></li>
+        <li><a href="./main.html">Home</a></li>
         <li><a href="#">Profile</a></li>
+        <li><a href="#">Log Out</a></li>
       </ul>
     </div>
 
     <!-- Chart Code -->
 
     <div class="chartMenu">
-      <p>Your Stats</p>
+      <p>Current Year & Month Statistics</p>
     </div>
     <div class="chartCard">
       <div class="chartBox">
@@ -69,7 +70,7 @@
         aspectRatio: 1,
         plugins: {
           legend: {
-            display: false
+            display: true
           },
           tooltip: {
             filter: (tooltipItem) => {
@@ -89,7 +90,7 @@
       //Bar Chart
       // setup
       const data = {
-        labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec",],
+        labels: ["January","February","March","April","May","June","July","August","September","October","November","December",],
         datasets: [{
             label: "Year Review",
             data: [
@@ -139,6 +140,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="main.js"></script>
+    <script src="stat.js"></script>
   </body>
 </html>
