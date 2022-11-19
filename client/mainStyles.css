@@ -41,3 +41,40 @@ body{
 .navbar ul li:hover::after{
     width: 100%;
 }
+
+/* Add Committment Button CSS */
+.addButton {
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    font-size: medium;
+    margin: 20px 10px;
+    border-radius: 25px;
+    border: 2px solid rgb(2, 169, 27);
+    background: transparent;
+    color:rgb(2, 169, 27);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.addHover {
+    background: rgb(2, 169, 27);
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+}
+button:hover span{
+    width: 100%;
+    border: none;
+}
+button:hover span{
+    border: none;
+}
+button:hover {
+    color: #fff;
+}

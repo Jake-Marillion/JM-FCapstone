@@ -1,4 +1,4 @@
-/* The nav bar font is different on this page than from the home page?  */
+/* TODO The nav bar font is different on this page than from the home page?  */
 
 *{
     margin: 0;
@@ -10,7 +10,7 @@ body{
 }
 
 
-/* Logo, Title, Menu */
+/* Logo, Title, Menu CSS*/
 .navbar{
     width: 85%;
     margin: auto;
@@ -44,12 +44,7 @@ body{
     width: 100%;
 }
 
-/* Chart/Stat Boxes */
-*{
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
+/* Chart CSS */
 .chartMenu {
   width: 100vw;
   height: 60px;
