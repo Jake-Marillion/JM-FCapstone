@@ -55,6 +55,7 @@ body{
     color:rgb(2, 169, 27);
     cursor: pointer;
     position: relative;
+    left: 1300px;
     overflow: hidden;
 }
 .addHover {
@@ -78,3 +79,77 @@ button:hover span{
 button:hover {
     color: #fff;
 }
+
+/* Add Committment Pop-up Code */
+.popModal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    display: none;
+}
+.popModalContent {
+    width: 700px;
+    height: 600px;
+    background-color: rgb(77, 77, 77);
+    border-radius: 25px;
+    border: 4px solid rgb(2, 169, 27);
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+input {
+    display: block;
+    margin: 20px auto;
+    height: 20px;
+}
+.nameInput {
+    width: 200px;
+}
+.currencyInput {
+    width: 100px;
+}
+.noteInput {
+    width: 400px;
+}
+.closeButton {
+    position: absolute;
+    top: 0px;
+    right: 14px;
+    font-size: 42px;
+    color: rgb(2, 169, 27);
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+.submitCommitmentButton {
+    width: 100px;
+    padding: 5px;
+    text-align: center;
+    font-size: medium;
+    margin: 20px 10px;
+    border-radius: 25px;
+    border: 2px solid rgb(2, 169, 27);
+    background: transparent;
+    color:rgb(2, 169, 27);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+/* TODO Hover is not working for this button?? */
+/* button:hover span{
+    width: 100%;
+    border: none;
+}
+button:hover span{
+    border: none;
+}
+button:hover {
+    color: #fff;
+} */
+
