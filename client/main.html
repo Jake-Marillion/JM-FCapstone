@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="mainStyles.css" />
-    <link rel="shortcut icon" type="image/png" href="../pictures/Logo.png">
+    <link rel="shortcut icon" type="image/png" href="../pictures/Logo.png" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,18 +10,18 @@
   </head>
   <body>
     <div class="navAndLogo">
-    <div class="logoTitle">
-      <img class="navbarLogo" src="../pictures/Logo.png" alt="logo" />
-      <h1 class="appName" style="color: rgb(2, 169, 27)">BILLIT</h1>
+      <div class="logoTitle">
+        <img class="navbarLogo" src="../pictures/Logo.png" alt="logo" />
+        <h1 class="appName" style="color: rgb(2, 169, 27)">BILLIT</h1>
+      </div>
+      <div class="navbar">
+        <ul>
+          <li><a href="./statPage.html">Statistics</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Log Out</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="navbar">
-      <ul>
-        <li><a href="./statPage.html">Statistics</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Log Out</a></li>
-      </ul>
-    </div>
-  </div>
 
     <!-- Add Committment Pop-up -->
     <div class="popModal">
@@ -29,13 +29,13 @@
         <div class="closeButton">+</div>
         <img src="../pictures/Logo.png" alt="logo" />
         <form action="" id="commitForm">
-          <input type="text" class="nameInput" placeholder="Committment Name">
-          <input type="date" class="dateInput">
-          <input type="time" class="timeInput">
+          <input type="text" class="nameInput" placeholder="Committment Name" />
+          <input type="date" class="dateInput" />
+          <input type="time" class="timeInput" />
           <!-- TODO add code to make it format as a number as they type? -->
-          <input data-type="currency" placeholder="$1,000.00" class="currencyInput">
-          <input type="text" placeholder="Notes" class="noteInput">
-          <button class="addButton" id="addButton" type="submit" form="commitForm"><span class="addHover"></span>SUBMIT</button>
+          <input data-type="currency" placeholder="$1,000.00" class="currencyInput"/>
+          <input type="text" placeholder="Notes" class="noteInput" />
+          <button class="addButtonSB submitButton" type="submit" form="commitForm" ><span class="addHover"></span>SUBMIT</button>
         </form>
       </div>
     </div>
@@ -44,7 +44,6 @@
     <div>
       <button class="addButton" id="addButton" type="button"><span class="addHover"></span>ADD COMMITTMENT</button>
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
