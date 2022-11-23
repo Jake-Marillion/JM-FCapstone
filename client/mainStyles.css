@@ -111,7 +111,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     z-index: 1;
-    display: none;
+    display: flex;
 }
 .popModalContent {
     width: 700px;

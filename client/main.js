@@ -12,3 +12,7 @@ document.getElementById("addButton").addEventListener("click", function() {
 document.querySelector(".closeButton").addEventListener("click", function() {
     document.querySelector(".popModal").mainStyles.display = "none"
 });
+
+document.getElementById("submitButton").addEventListener("click", function() {
+    document.querySelector(".popModal").mainStyles.display = "none"
+});
