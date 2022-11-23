@@ -12,7 +12,7 @@ body{
 .navbar{
     width: 85%;
     margin: auto;
-    padding: 35px 0;
+    padding: 25px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -55,7 +55,7 @@ body{
     color:rgb(2, 169, 27);
     cursor: pointer;
     position: relative;
-    left: 1300px;
+    left: 100px;
     overflow: hidden;
 }
 .addHover {
@@ -128,7 +128,7 @@ input {
 }
 .submitCommitmentButton {
     width: 100px;
-    padding: 5px;
+    padding: 5px 0;
     text-align: center;
     font-size: medium;
     margin: 20px 10px;
@@ -141,6 +141,7 @@ input {
     overflow: hidden;
     text-transform: uppercase;
 }
+
 /* TODO Hover is not working for this button?? */
 /* button:hover span{
     width: 100%;
