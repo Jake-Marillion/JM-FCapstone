@@ -28,15 +28,14 @@
       <div class="popModalContent">
         <div class="closeButton">+</div>
         <img src="../pictures/Logo.png" alt="logo" />
-        <form action="">
+        <form action="" id="commitForm">
           <input type="text" class="nameInput" placeholder="Committment Name">
           <input type="date" class="dateInput">
           <input type="time" class="timeInput">
           <!-- TODO add code to make it format as a number as they type? -->
           <input data-type="currency" placeholder="$1,000.00" class="currencyInput">
           <input type="text" placeholder="Notes" class="noteInput">
-          <a href="" id="submitButton" class="submitCommitmentButton" class="addHover">Submit</a>
-          <input type="submit" id="submitButton" class="submitCommitmentButton" class="addHover" value="Submit">
+          <button class="addButton" id="addButton" type="submit" form="commitForm"><span class="addHover"></span>SUBMIT</button>
         </form>
       </div>
     </div>
