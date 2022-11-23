@@ -13,20 +13,28 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 125px;
 }
 .logoTitle {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 25%;
-    padding: 25px;
+    width: 20%;
+    padding: 30px;
+}
+.navbarLogo {
+    width: 75px;
+    height: 75px;
+}
+.appName {
+    size: large;
 }
 .navbar{
-    width: 67%;
+    width: 70%;
     margin: auto;
     padding: 25px 0;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
 }
 .navbar ul li{
@@ -67,7 +75,7 @@ body{
     color:rgb(2, 169, 27);
     cursor: pointer;
     position: relative;
-    left: 100px;
+    left: 85px;
     overflow: hidden;
 }
 .addHover {

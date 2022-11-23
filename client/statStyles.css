@@ -1,5 +1,3 @@
-/* TODO The nav bar font is different on this page than from the home page?  */
-
 *{
     margin: 0;
     padding: 0;
@@ -10,14 +8,34 @@ body{
 }
 
 
-/* Logo, Title, Menu CSS*/
+/* Logo, Title, Menu */
+.navAndLogo{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 125px;
+}
+.logoTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 20%;
+  padding: 30px;
+}
+.navbarLogo {
+  width: 75px;
+  height: 75px;
+}
+.appName {
+  size: large;
+}
 .navbar{
-    width: 85%;
-    margin: auto;
-    padding: 35px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 70%;
+  margin: auto;
+  padding: 25px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .navbar ul li{
     list-style: none;
@@ -48,7 +66,7 @@ body{
 .chartMenu {
   width: 100vw;
   height: 60px;
-  background: rgb(39, 39, 39);
+  background: rgba(39, 39, 39, 0.75);
   color: rgb(2, 169, 27);
 }
 .chartMenu p {
@@ -68,7 +86,7 @@ body{
 }
 .chartBox {
   width: 40%;
-  padding: 20px;
+  padding: 10px;
   border-radius: 20px;
   border: solid 3px black;
   background: white;
