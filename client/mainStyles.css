@@ -99,7 +99,7 @@ button:hover {
 }
 .popModalContent {
     width: 600px;
-    height: 500px;
+    height: 400px;
     background-color: rgb(77, 77, 77);
     border-radius: 25px;
     border: 4px solid rgb(2, 169, 27);
@@ -144,3 +144,37 @@ input {
     left: 85px;
     overflow: hidden;
 }
+
+/* Bill Display Code */
+.bill {
+    width: 50%;
+    height: 10%;
+    color:rgb(2, 169, 27);
+    margin: 20px 10px;
+    border-radius: 25px;
+    border: 2px solid rgb(2, 169, 27);
+    background: transparent;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.paidSelector {
+    cursor: pointer;
+    color: rgb(2, 169, 27);
+    background-color: rgb(77, 77, 77);
+}
+
+/* Down Arrow Code */
+.arrow {
+    border: solid rgb(2, 169, 27);
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 3px;
+    cursor: pointer;
+  }
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }

@@ -31,7 +31,6 @@
         <form action="" id="commitForm">
           <input type="text" class="nameInput" placeholder="Committment Name" />
           <input type="date" class="dateInput" />
-          <input type="time" class="timeInput" />
           <!-- TODO add code to make it format as a number as they type? -->
           <input data-type="currency" placeholder="$1,000.00" class="currencyInput"/>
           <input type="text" placeholder="Notes" class="noteInput" />
@@ -41,9 +40,26 @@
     </div>
 
     <!-- Add  Commitment Button -->
-    <div>
-      <button class="addButton" id="addButton" type="button"><span class="addHover"></span>ADD COMMITTMENT</button>
-    </div>
+      <div>
+        <button class="addButton" id="addButton" type="button"><span class="addHover"></span>ADD COMMITTMENT</button>
+      </div>
+      
+      <div class="allBills">
+      <div class="bill">
+        <p class="billName">Bill Name</p>
+        <p class="billAmount">100.00</p>
+        <p class="dueOn">DUE ON</p>
+        <p class="billDate">2022-12-20</p>
+          <div class="rightBillSection">
+            <select class="paidSelector" name="paidSelector" id="paidSelector">
+              <option value="incomplete">incomplete</option>
+              <option value="complete">complete</option>
+            </select>
+            <i class="arrow down"></i>
+          </div>
+        </div>
+      </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
