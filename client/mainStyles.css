@@ -99,7 +99,7 @@ button:hover {
 }
 .popModalContent {
     width: 600px;
-    height: 400px;
+    height: 500px;
     background-color: rgb(77, 77, 77);
     border-radius: 25px;
     border: 4px solid rgb(2, 169, 27);
@@ -115,11 +115,17 @@ input {
 .nameInput {
     width: 200px;
 }
+.dateInput {
+    width: 100px;
+}
 .currencyInput {
     width: 100px;
 }
 .noteInput {
     width: 400px;
+}
+.textColor {
+    color: rgb(2, 169, 27);
 }
 .closeButton {
     position: absolute;
@@ -188,3 +194,40 @@ input {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }
+
+  /* Update/Delete Pop-up Code */
+  .updateDeleteButtons {
+    display: flex;
+    justify-content: center;
+  }
+  .editModal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    display: flex;
+}
+.editModalContent {
+    width: 600px;
+    height: 500px;
+    background-color: rgb(77, 77, 77);
+    border-radius: 25px;
+    border: 4px solid rgb(2, 169, 27);
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+.closeEditButton {
+    position: absolute;
+    top: 0px;
+    right: 14px;
+    font-size: 42px;
+    color: rgb(2, 169, 27);
+    transform: rotate(45deg);
+    cursor: pointer;
+}

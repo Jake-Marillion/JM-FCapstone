@@ -28,11 +28,14 @@
         <div class="closeButton">+</div>
         <img src="../pictures/Logo.png" alt="logo" />
         <form action="" id="commitForm">
-          <input type="text" class="nameInput" placeholder="Committment Name" />
-          <input type="date" class="dateInput" />
-          <!-- TODO add code to make it format as a number as they type? -->
-          <input data-type="currency" placeholder="$1,000.00" class="currencyInput"/>
-          <input type="text" placeholder="Notes" class="noteInput" />
+          <p class="textColor">COMMITMENT NAME</p>
+          <input type="text" class="nameInput"/>
+          <p class="textColor">DUE ON YYYY-MM-DD</p>
+          <input type="text" class="dateInput"/>
+          <p class="textColor">DECIMAL AMOUNT</p>
+          <input data-type="currency" class="currencyInput"/>
+          <p class="textColor">NOTES</p>
+          <input type="text" class="noteInput"/>
           <button class="addButtonSB submitButton" type="submit" form="commitForm" ><span class="addHover"></span>SUBMIT</button>
         </form>
       </div>
@@ -55,11 +58,34 @@
               <option value="incomplete">incomplete</option>
               <option value="complete">complete</option>
             </select>
-            <i class="arrow down"></i>
+            <i id="1" class="arrow down"></i>
           </div>
         </div>
       </div>
     </container>
+
+    <!-- TODO finish this HTML + CSS -->
+        <!-- View/Edit Bill Pop-up -->
+        <div class="editModal">
+          <div class="editModalContent">
+            <div class="closeEditButton">+</div>
+            <img src="../pictures/Logo.png" alt="logo" />
+            <form action="" id="updateForm">
+              <p class="textColor">COMMITMENT NAME</p>
+              <input type="text" class="nameInput"/>
+              <p class="textColor">DUE ON YYYY-MM-DD</p>
+              <input type="text" class="dateInput"/>
+              <p class="textColor">DECIMAL AMOUNT</p>
+              <input data-type="currency" class="currencyInput"/>
+              <p class="textColor">NOTES</p>
+              <input type="text" class="noteInput"/>
+              <div class="updateDeleteButtons">
+              <button class="addButtonSB updateButton" type="submit" form="updateForm" ><span class="addHover"></span>UPDATE</button>
+              <button class="addButtonSB deleteButton" type="submit" form="updateForm" ><span class="addHover"></span>DELETE</button>
+            </div>
+            </form>
+          </div>
+        </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

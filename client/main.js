@@ -7,20 +7,36 @@ document.querySelector(".closeButton").addEventListener("click", function() {
     document.querySelector(".popModal").style.display = "none"
 });
 document.querySelector(".submitButton").addEventListener("click", function() {
-    //TODO add data push here or call to server push function.
+    //TODO add data push here or call to sql insert function.
     document.querySelector(".popModal").style.display = "none"
 });
 document.querySelector(".logOut").addEventListener("click", function() {
     //TODO add code here to log user out.
 });
+//TODO does not work.
+document.querySelector(".arrow down").addEventListener("click", function () {
+    document.querySelector(".editModal").style.display = "flex"
+    //TODO set contents equal to contents of sql object w that id.
+})
+document.querySelector(".closeEditButton").addEventListener("click", function() {
+    document.querySelector(".editModal").style.display = "none"
+});
+document.querySelector(".updateButton").addEventListener("click", function() {
+    //TODO add data push here or call to sql update function.
+    document.querySelector(".editModal").style.display = "none"
+});
+document.querySelector(".deleteButton").addEventListener("click", function() {
+    //TODO add data push here or call to sql delete function.
+    document.querySelector(".editModal").style.display = "none"
+});
 
 const allBills = document.querySelector(".allBills")
 
 function makeBillCard(client) {
-    const { id, name, date, amount, notes} = client
+    const { id, name, date, amount} = client
     
     const billCard = 
-    `<div id="${id}" class="bill">
+    `<div class="bill">
     <p class="billName">${name}</p>
     <p class="billAmount">${amount}</p>
     <p>DUE ON</p>
@@ -30,7 +46,7 @@ function makeBillCard(client) {
           <option value="incomplete">incomplete</option>
           <option value="complete">complete</option>
         </select>
-        <i class="arrow down"></i>
+        <i id="${id}" class="arrow down"></i>
       </div>
     </div>`
 
