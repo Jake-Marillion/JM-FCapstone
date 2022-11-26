@@ -14,7 +14,7 @@ document.querySelector(".logOut").addEventListener("click", function() {
     //TODO add code here to log user out.
 });
 //TODO does not work.
-document.querySelector(".arrow down").addEventListener("click", function () {
+document.querySelector(".arrow").addEventListener("click", function () {
     document.querySelector(".editModal").style.display = "flex"
     //TODO set contents equal to contents of sql object w that id.
 })
