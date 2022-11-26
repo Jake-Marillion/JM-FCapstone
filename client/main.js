@@ -1,4 +1,4 @@
-//Add Committment Button, Input Form, and Logout Button.
+//Add Committment Button, Input Form, Update Form, and Logout Button.
 //TODO need something to check if the date of the bill has passed and change the border color to red.
 document.getElementById("addButton").addEventListener("click", function() {
     document.querySelector(".popModal").style.display = "flex"
@@ -32,6 +32,9 @@ document.querySelector(".deleteButton").addEventListener("click", function() {
 
 const allBills = document.querySelector(".allBills")
 
+
+
+//Code that makes HTML Bills.
 function makeBillCard(client) {
     const { id, name, date, amount} = client
     
@@ -53,7 +56,6 @@ function makeBillCard(client) {
     return billCard
 }
 function getAllBills() {
-//TODO how does this only call the bills that I call in the controller.js getBills function?
     axios.get("http://localhost:3737/bills")
     .then(res => {
         res.data.forEach(client => {
@@ -63,5 +65,7 @@ function getAllBills() {
     })
     .catch(err => console.log(err))
 }
+
+
 
 getAllBills()
