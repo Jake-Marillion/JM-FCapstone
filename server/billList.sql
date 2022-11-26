@@ -1,4 +1,5 @@
 CREATE TABLE bills (
+    id SERIAL PRIMARY KEY,
     name VARCHAR(100),
     date DATE,
     amount INT,

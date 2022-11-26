@@ -17,8 +17,7 @@
       <div class="navbar">
         <ul>
           <li><a href="./statPage.html">Statistics</a></li>
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Log Out</a></li>
+          <li class="logOut"><a href="#">Log Out</a></li>
         </ul>
       </div>
     </div>
@@ -40,7 +39,8 @@
     </div>
 
     <!-- Add  Commitment Button -->
-      <div>
+    <container class="commitmentContainer">
+      <div class="addButtonDiv">
         <button class="addButton" id="addButton" type="button"><span class="addHover"></span>ADD COMMITTMENT</button>
       </div>
       
@@ -48,7 +48,7 @@
       <div class="bill">
         <p class="billName">Bill Name</p>
         <p class="billAmount">100.00</p>
-        <p class="dueOn">DUE ON</p>
+        <p>DUE ON</p>
         <p class="billDate">2022-12-20</p>
           <div class="rightBillSection">
             <select class="paidSelector" name="paidSelector" id="paidSelector">
@@ -59,7 +59,7 @@
           </div>
         </div>
       </div>
-
+    </container>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

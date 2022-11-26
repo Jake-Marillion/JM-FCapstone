@@ -146,9 +146,19 @@ input {
 }
 
 /* Bill Display Code */
+.commitmentContainer {
+    width: 100%;
+    display: flex;
+}
+.allBills {
+    width: 75%;
+}
+.addButtonDiv {
+    width: 25%;
+}
 .bill {
-    width: 50%;
-    height: 10%;
+    width: 91%;
+    height: 20%;
     color:rgb(2, 169, 27);
     margin: 20px 10px;
     border-radius: 25px;

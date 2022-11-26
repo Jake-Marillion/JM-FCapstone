@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-// const dotenv = require("dotenv").config()
+const dotenv = require("dotenv").config()
 const Sequelize = require("sequelize")
 const app = express();
 app.use(express.json());
@@ -14,14 +14,17 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
     }
 })
 
-// const getBills = (req, res) => {
+const getBills = (req, res) => {
 
-//     sequelize.query("select * from bills where isPaid = 1 order by date desc;")
+    sequelize.query("select * from bills where isPaid = 1 order by date desc;")
 
-//     .then(dbRes => res.status(200).send(dbRes[0]))
-//     .catch(err => console.log(err))
-// }
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+//Endpoint
+app.get("/bills", getBills)
 
+//TODO fix these functions
 // const createBill = (req, res) => {
 //     let { name, date, amount, isPaid, notes } = req.body
 //     sequelize.query("insert into bills (name, date, amount, isPaid, notes) values (${name}, ${date}, ${amount}, ${isPaid}, ${notes};")
