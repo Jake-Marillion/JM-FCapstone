@@ -24,32 +24,33 @@ const getBills = (req, res) => {
 //Endpoint
 app.get("/bills", getBills)
 
-//TODO fix these functions
-// const createBill = (req, res) => {
-//     let { name, date, amount, isPaid, notes } = req.body
-//     sequelize.query("insert into bills (name, date, amount, isPaid, notes) values (${name}, ${date}, ${amount}, ${isPaid}, ${notes};")
-//     .then(dbRes => res.status(200).send(dbRes[0]))
-//     .catch(err => console.log(err))
-// }
+//TODO fix/test these functions.  Backticks?
+const createBill = (req, res) => {
+    let { name, date, amount, notes } = req.body
+    const isPaid = 1
+    sequelize.query("insert into bills (name, date, amount, isPaid, notes) values (${name}, ${date}, ${amount}, ${isPaid}, ${notes};")
+    //TODO do I need to call the getBills Function here? 
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.post("/createBill", createBill)
 
-// const updateBill = (req, res) => {
-//     let { name, date, amount, isPaid, notes } = req.body
+const updateBill = (req, res) => {
+    let { name, date, amount, notes } = req.body
+    sequelize.query("update bills set name = ${name}, set date = ${date}, set amount = ${amount}, set isPaid = ${isPaid}, set notes = ${notes}, where id = i.innerHTML[id] TODO;")
 
-//     sequelize.query("update bills set name = ${name} set date = ${date} set amount = ${amount} set isPaid = ${isPaid} set notes = ${notes} where TODO;")
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.put("/updateBill", updateBill)
 
-//     .then(dbRes => res.status(200).send(dbRes[0]))
-//     .catch(err => console.log(err))
-// }
+const deleteBill = (req, res) => {
+    sequelize.query("delete * from bills where id = ${req.body};")
 
-// const deleteBill = (req, res) => {
-//     let { name, date, amount, isPaid, notes } = req.body
-
-//     sequelize.query("TODO = ${name} set date = ${date} set amount = ${amount} set isPaid = ${isPaid} set notes = ${notes} where TODO;")
-
-//     .then(dbRes => res.status(200).send(dbRes[0]))
-//     .catch(err => console.log(err))
-// }
-
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.delete("/deleteBill", deleteBill)
 
 module.exports = {
     getBills,

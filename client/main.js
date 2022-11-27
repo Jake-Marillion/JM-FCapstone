@@ -7,13 +7,13 @@ document.querySelector(".closeButton").addEventListener("click", function() {
     document.querySelector(".popModal").style.display = "none"
 });
 document.querySelector(".submitButton").addEventListener("click", function() {
-    //TODO add data push here or call to sql insert function.
+    createBill(innerHTML)
     document.querySelector(".popModal").style.display = "none"
 });
 document.querySelector(".logOut").addEventListener("click", function() {
     //TODO add code here to log user out.
 });
-//TODO does not work.
+//TODO all below do not work.
 document.querySelector(".arrow").addEventListener("click", function () {
     document.querySelector(".editModal").style.display = "flex"
     //TODO set contents equal to contents of sql object w that id.
@@ -22,21 +22,19 @@ document.querySelector(".closeEditButton").addEventListener("click", function() 
     document.querySelector(".editModal").style.display = "none"
 });
 document.querySelector(".updateButton").addEventListener("click", function() {
-    //TODO add data push here or call to sql update function.
+    updateBill(innerHTML)
     document.querySelector(".editModal").style.display = "none"
 });
 document.querySelector(".deleteButton").addEventListener("click", function() {
-    //TODO add data push here or call to sql delete function.
+    deleteBill(innerHTML)
     document.querySelector(".editModal").style.display = "none"
 });
 
 const allBills = document.querySelector(".allBills")
 
-
-
 //Code that makes HTML Bills.
-function makeBillCard(client) {
-    const { id, name, date, amount} = client
+function makeBillCard(bill) {
+    const { id, name, date, amount} = bill
     
     const billCard = 
     `<div class="bill">
@@ -58,14 +56,39 @@ function makeBillCard(client) {
 function getAllBills() {
     axios.get("http://localhost:3737/bills")
     .then(res => {
-        res.data.forEach(client => {
-            const billCard = makeBillCard(client)
+        res.data.forEach(bill => {
+            const billCard = makeBillCard(bill)
             allBills.innerHTML += billCard
         })
     })
     .catch(err => console.log(err))
 }
 
+//Code to Create Bills TODO
+function createBill(req, res) {
+    // const { name, date, amount, notes } = req.params IS THIS LINE NEEDED?
 
+    axios.get("http://localhost:3737/createBill")
+
+    .catch(err => console.log(err))
+}
+
+//Code to Update Bills TODO
+function updateBill(req, res) {
+    // const { name, date, amount, notes } = req.params IS THIS LINE NEEDED?
+
+    axios.get("http://localhost:3737/updateBill")
+
+    .catch(err => console.log(err))
+}
+
+//Code to Delete Bills TODO
+function deleteBill(req, res) {
+    // const req.body = i.innerHTML[id]
+
+    axios.get("http://localhost:3737/deleteBill")
+
+    .catch(err => console.log(err))
+}
 
 getAllBills()
