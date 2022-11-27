@@ -15,8 +15,8 @@ document.querySelector(".logOut").addEventListener("click", function() {
 });
 //TODO all below do not work.
 document.querySelector(".arrow").addEventListener("click", function () {
-    document.querySelector(".editModal").style.display = "flex"
     //TODO set contents equal to contents of sql object w that id.
+    document.querySelector(".editModal").style.display = "flex"
 })
 document.querySelector(".closeEditButton").addEventListener("click", function() {
     document.querySelector(".editModal").style.display = "none"

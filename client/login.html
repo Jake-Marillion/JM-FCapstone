@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="loginStyles.css">
+    <link rel="shortcut icon" type="image/png" href="../pictures/Logo.png" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JM-FCapstone Login</title>
+  </head>
+  <body>
+    <div class="logoDiv">
+      <img class="logo" src="../pictures/Logo.png" alt="logo" />
+    </div>
+
+    <div class="center">
+      <h1>BILLIT</h1>
+      <form method="post">
+        <div class="txt_field">
+          <input type="text" required>
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div class="txt_field">
+          <input type="password" required>
+          <span></span>
+          <label>Password</label>
+        </div>
+        <div class="pass">Forgot Password?</div>
+        <input id="loginButton" type="submit" value="Login">
+        <div class="signup_link">
+          Not a member? <a href="#">Signup</a>
+        </div>
+      </form>
+    </div>
+
+            <!-- Signup Pop-up -->
+            <div class="signupModal">
+              <div class="signupModalContent">
+                <div class="closeSignupButton">+</div>
+                <img src="../pictures/Logo.png" alt="logo" />
+                <form action="" id="signupForm">
+                  <p class="textColor">USERNAME</p>
+                  <input type="text" class="dateInput" required/>
+                  <p class="textColor">PASSWORD</p>
+                  <input data-type="currency" class="currencyInput" required/>
+                  <p class="textColor">EMAIL</p>
+                  <input type="text" class="noteInput" required/>
+                  <button class="signupButton" type="submit" form="signupForm" ><span class="addHover"></span>CONFIRM</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Forgot Password Pop-up -->
+            <div class="forgotModal">
+              <div class="forgotModalContent">
+                <div class="closeForgotButton">+</div>
+                <img src="../pictures/Logo.png" alt="logo" />
+                <form action="" id="forgotForm">
+                  <p class="textColor">We'll send you an email with your login information</p>
+                  <input type="text" class="emailInput" placeholder="email on account" required/>
+                  <button class="sendButton" type="submit" form="forgotForm" ><span class="addHover"></span>SEND</button>
+                </form>
+              </div>
+            </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="login.js"></script>
+  </body>
+</html>
