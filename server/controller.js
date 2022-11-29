@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv").config()
-const { default: axios } = require("axios")
-const Sequelize = require("sequelize")
+const dotenv = require("dotenv").config();
+const axios = require("axios").default;
+const Sequelize = require("sequelize");
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 const sequelize = new Sequelize(CONNECTION_STRING, {
     dialect: 'postgres',
@@ -14,7 +14,7 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
             rejectUnauthorized: false
         }
     }
-})
+});
 
 //Function to get commitments
 const getCommitments = (req, res) => {
@@ -78,7 +78,7 @@ module.exports = {
     updateCommitment,
     markCommitmentComplete,
     deleteCommitment
-}
+};
 
 //TODO seed with an example commitment or two the first time they log in? 
 
