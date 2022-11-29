@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv").config()
+const { default: axios } = require("axios")
 const Sequelize = require("sequelize")
 const app = express();
 app.use(express.json());
