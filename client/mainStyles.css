@@ -62,7 +62,7 @@ body{
     width: 100%;
 }
 
-/* Add Committment Button CSS */
+/* Add Commitment Button CSS */
 .addButton {
     width: 200px;
     padding: 15px 0;
@@ -84,7 +84,7 @@ button:hover {
     color: #fff;
 }
 
-/* Add Committment Pop-up Code */
+/* Add Commitment Pop-up Code */
 .popModal {
     width: 100%;
     height: 100%;
@@ -156,13 +156,13 @@ input {
     width: 100%;
     display: flex;
 }
-.allBills {
+.allCommitments {
     width: 75%;
 }
 .addButtonDiv {
     width: 25%;
 }
-.bill {
+.commitment {
     width: 91%;
     height: 20%;
     color:rgb(2, 169, 27);
@@ -175,7 +175,19 @@ input {
     align-items: center;
     justify-content: space-between;
 }
-
+.pastCommitment {
+    width: 91%;
+    height: 20%;
+    color:rgb(2, 169, 27);
+    margin: 20px 10px;
+    border-radius: 25px;
+    border: 2px solid rgb(169, 2, 2);
+    background: transparent;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .paidSelector {
     cursor: pointer;
     color: rgb(2, 169, 27);

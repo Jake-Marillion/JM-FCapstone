@@ -1,8 +1,7 @@
-//TODO forgot password, signup, hashing, backend
-
 //Login Button
 document.getElementById("loginButton").addEventListener("click", function() {
-    //TODO check to see if they have signed up else allert "You need to signup"
+    //TODO check to see if they have signed up else allert "Looks like you need to signup"
+    //Hash and check login info.
     //TODO link to their main.html if pass check.
 });
 
@@ -34,6 +33,6 @@ document.querySelector(".closeSignupButton").addEventListener("click", function(
 
 //Confirm Button
 document.querySelector(".signupButton").addEventListener("click", function() {
-    //TODO add code to push info to back end.
+    //TODO add code to push info to back end and confirmation email w login info.
     document.querySelector(".signupModal").style.display = "none"
 });
