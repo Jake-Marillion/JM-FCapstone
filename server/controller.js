@@ -54,7 +54,7 @@ app.put("/updateCommitment", updateCommitment)
 //Function to mark commitments complete TODO fix function - Backticks?
 const markCommitmentComplete = (req, res) => {
     let { name, date, amount, notes } = req.body
-    sequelize.query("insert into paidCommitments (date, amount) values (TIE TO ITEM FROM COMMITMENTS TABLE)")
+    sequelize.query("insert into paidCommitments (date, amount, isPaid, userID) values (TODO TIE TO ITEM FROM COMMITMENTS TABLE)")
     sequelize.query("delete * from commitments where id = ${req.body ? };")
 
     .then(dbRes => res.status(200).send(dbRes[0]))

@@ -151,7 +151,7 @@ input {
     overflow: hidden;
 }
 
-/* Bill Display Code */
+/* Commitment Display Code */
 .commitmentContainer {
     width: 100%;
     display: flex;

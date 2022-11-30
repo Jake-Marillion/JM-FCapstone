@@ -50,7 +50,7 @@ document.querySelector(".complete").addEventListener("click", function() {
     //Or will removing it from the backend table do that?
 })
 
-const allBills = document.querySelector(".allCommitments")
+const allCommitments = document.querySelector(".allCommitments")
 
 //Code that makes HTML Commitments w red borders if date is past and green if not.
 function makeCommitmentCard(commitment) {

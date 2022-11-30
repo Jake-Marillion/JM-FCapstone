@@ -1,8 +1,13 @@
+const { mapFinderOptions } = require("sequelize/types/utils");
+
 //Login Button
 document.getElementById("loginButton").addEventListener("click", function() {
-    //TODO check to see if they have signed up else allert "Looks like you need to signup"
-    //Hash and check login info.
-    //TODO link to their main.html if pass check.
+    //TODO Hash and check login info.
+    // if(info checks out){
+    //     document.open(main.js);
+    // } else {
+    //     alert("Looks like you need to sign up with that info!");
+    // }
 });
 
 //Forgot Password Button
@@ -17,7 +22,8 @@ document.querySelector(".closeForgotButton").addEventListener("click", function(
 
 //Forgot Password Send Email Button
 document.querySelector(".sendButton").addEventListener("click", function() {
-    //TODO code to send email with login info to the inputted email or to allert error no email found. 
+    //TODO code to send email with login info to the inputted email 
+    // or to alert, error no account found with that email. 
     document.querySelector(".forgotModal").style.display = "none"
 });
 

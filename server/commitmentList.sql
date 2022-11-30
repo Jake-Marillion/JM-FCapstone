@@ -5,6 +5,10 @@ CREATE TABLE users (
     email VARCHAR(200) NOT NULL
 )
 
+-- User Seed
+INSERT INTO users (username, password, email)
+VALUES ("adminAccount", "adminPassword1*", "fakeemail@gmail.com")
+
 CREATE TABLE commitments (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -24,3 +28,5 @@ CREATE TABLE paidCommitments (
     -- TODO does amount need to be a decimal?
     FOREIGN KEY (UserID) REFERENCES users(UserID)
 );
+
+-- TODO seed with test user for GitHub README.
