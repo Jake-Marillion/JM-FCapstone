@@ -155,13 +155,13 @@ input {
   margin: 20px auto;
   height: 20px;
 }
-.dateInput {
+.usernameInput {
   width: 200px;
 }
-.currencyInput {
+.passwordInput {
   width: 200px;
 }
-.noteInput {
+.emailInput {
   width: 200px;
 }
 .textColor {

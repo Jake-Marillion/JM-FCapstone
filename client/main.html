@@ -32,7 +32,7 @@
           <input type="text" class="nameInput" required/>
           <p class="textColor">DUE ON YYYY-MM-DD</p>
           <input type="text" class="dateInput" required/>
-          <p class="textColor">DECIMAL AMOUNT</p>
+          <p class="textColor">COMMITMENT AMOUNT</p>
           <input data-type="currency" class="currencyInput" required/>
           <p class="textColor">NOTES</p>
           <input type="text" class="noteInput"/>
@@ -48,6 +48,7 @@
       </div>
       
       <div class="allCommitments">
+        <!-- TODO remove this code before final push. -->
       <div class="commitment">
         <p class="commitmentName">Commitment Name</p>
         <p class="commitmentAmount">100.00</p>
@@ -71,13 +72,14 @@
             <img src="../pictures/Logo.png" alt="logo" />
             <form action="" id="updateForm">
               <p class="textColor">COMMITMENT NAME</p>
-              <input type="text" class="nameInput" required/>
+              <!-- TODO change these classes to new inputs? -->
+              <input type="text" class="newNameInput" required/>
               <p class="textColor">DUE ON YYYY-MM-DD</p>
-              <input type="text" class="dateInput" required/>
+              <input type="text" class="newDateInput" required/>
               <p class="textColor">DECIMAL AMOUNT</p>
-              <input data-type="currency" class="currencyInput" required/>
+              <input data-type="currency" class="newCurrencyInput" required/>
               <p class="textColor">NOTES</p>
-              <input type="text" class="noteInput"/>
+              <input type="text" class="newNoteInput"/>
               <div class="updateDeleteButtons">
               <button class="addButtonSB updateButton" type="submit" form="updateForm" ><span class="addHover"></span>UPDATE</button>
               <button class="addButtonSB deleteButton" type="submit" form="updateForm" ><span class="addHover"></span>DELETE</button>

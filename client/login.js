@@ -1,4 +1,5 @@
-const { mapFinderOptions } = require("sequelize/types/utils");
+// const { mapFinderOptions } = require("sequelize/types/utils");
+// Where did the above code come from?? TODO
 
 //Login Button
 document.getElementById("loginButton").addEventListener("click", function() {
@@ -39,6 +40,22 @@ document.querySelector(".closeSignupButton").addEventListener("click", function(
 
 //Confirm Button
 document.querySelector(".signupButton").addEventListener("click", function() {
-    //TODO add code to push info to back end and confirmation email w login info.
+    createUsers()
+    //TODO add code to send confirmation email w login info if have time.
+    //TODO trigger seed function with an example commitment or two?
     document.querySelector(".signupModal").style.display = "none"
 });
+
+//Code to Create Users
+function createUsers(username, password, email) { 
+    let username = document.querySelector(".usernameInput").value;
+    let password = document.querySelector(".passwordInput").value;
+    let email = document.querySelector(".emailInput").value;
+    //TODO do I need to hash the password here?
+
+    let { username, password, email } = body
+    axios.post("http://localhost:3737/createUser", body)
+
+    .then(getAllCommitments())
+    .catch(err => console.log(err))
+}

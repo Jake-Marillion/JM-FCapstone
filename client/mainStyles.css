@@ -124,6 +124,18 @@ input {
 .noteInput {
     width: 400px;
 }
+.newNameInput {
+    width: 200px;
+}
+.newDateInput {
+    width: 100px;
+}
+.newCurrencyInput {
+    width: 100px;
+}
+.newNoteInput {
+    width: 400px;
+}
 .textColor {
     color: rgb(2, 169, 27);
 }

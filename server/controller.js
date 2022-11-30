@@ -20,7 +20,7 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 //Function to get commitments
 const getCommitments = (req, res) => {
 
-    sequelize.query("select * from commitments where isPaid = 1 order by date desc;")
+    sequelize.query(`select * from commitments where isPaid=1 and ${userId}=commitments.userID order by date desc;`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -28,22 +28,22 @@ const getCommitments = (req, res) => {
 //Endpoint
 app.get("/commitments", getCommitments)
 
-//Function to create commitments TODO fix function - Backticks?
+//Function to create commitments
 const createCommitment = (req, res) => {
-    let { name, date, amount, notes } = req.body
+    let { name, date, amount, notes, userId } = req.body
     const isPaid = 1
-    sequelize.query("insert into commitments (name, date, amount, isPaid, notes) values (${name}, ${date}, ${amount}, ${isPaid}, ${notes};")
-    //TODO do I need to call the getCommitments Function here to reload my page? 
+    sequelize.query(`insert into commitments (name, date, amount, isPaid, notes, userId) values (${name}, ${date}, ${amount}, ${isPaid}, ${notes}, ${userId};`)
+
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
 //Endpoint
 app.post("/createCommitment", createCommitment)
 
-//Function to update commitments TODO fix function - Backticks?
+//Function to update commitments
 const updateCommitment = (req, res) => {
-    let { name, date, amount, notes } = req.body
-    sequelize.query("update commitments set name = ${name}, set date = ${date}, set amount = ${amount}, set isPaid = ${isPaid}, set notes = ${notes}, where id = i.innerHTML[id] TODO;")
+    let { name, date, amount, notes, commitmentId } = req.body
+    sequelize.query(`update commitments set name = ${name}, set date = ${date}, set amount = ${amount}, set notes = ${notes}, where ${commitmentId}=commitments.id AND ${userId}=commitments.userId;`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -51,11 +51,12 @@ const updateCommitment = (req, res) => {
 //Endpoint
 app.put("/updateCommitment", updateCommitment)
 
-//Function to mark commitments complete TODO fix function - Backticks?
+//Function to mark commitments complete
 const markCommitmentComplete = (req, res) => {
-    let { name, date, amount, notes } = req.body
-    sequelize.query("insert into paidCommitments (date, amount, isPaid, userID) values (TODO TIE TO ITEM FROM COMMITMENTS TABLE)")
-    sequelize.query("delete * from commitments where id = ${req.body ? };")
+    let { commitmentId, date, amount, userId } = req.body
+    let isPaid = 0
+    sequelize.query(`insert into paidCommitments (date, amount, isPaid, userId) values (${date}, ${amount}, ${isPaid}, ${userId});`)
+    sequelize.query(`delete * from commitments where id=${commitmentId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -63,9 +64,10 @@ const markCommitmentComplete = (req, res) => {
 //Endpoint
 app.put("/markCommitmentComplete", markCommitmentComplete)
 
-//Function to delete commitments TODO fix function - Backticks?
+//Function to delete commitments
 const deleteCommitment = (req, res) => {
-    sequelize.query("delete * from commitments where id = ${req.body};")
+    let { commitmentId } = req.body
+    sequelize.query(`delete * from commitments where id=${commitmentId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -73,14 +75,26 @@ const deleteCommitment = (req, res) => {
 //Endpoint
 app.delete("/deleteCommitment", deleteCommitment)
 
+//Function to create users
+const createUser = (req, res) => {
+    //TODO need to hash the pasword to send it here?
+    let { username, password, email } = req.body
+
+    sequelize.query(`insert into users (username, password, email) values (${username}, ${password}, ${email});`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+//Endpoint
+app.post("/createUser", createUser)
+
 module.exports = {
     getCommitments,
     createCommitment,
     updateCommitment,
     markCommitmentComplete,
-    deleteCommitment
-};
-
-//TODO seed with an example commitment or two the first time they log in? 
+    deleteCommitment,
+    createUser
+}; 
 
 app.listen(3737, () => console.log("Server running on 3737"));
