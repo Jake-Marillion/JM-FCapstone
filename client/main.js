@@ -101,9 +101,9 @@ function makeCommitmentCard(commitment) {
 function getAllCommitments() {
     axios.get("http://localhost:3737/commitments")
     .then(res => {
-        res.data.forEach(bill => {
-            const commitmentCard = makeCommitmentCard(bill)
-            allBills.innerHTML += commitmentCard
+        res.data.forEach(commitment => {
+            const commitmentCard = makeCommitmentCard(commitment)
+            allCommitments.innerHTML += commitmentCard
         })
     })
     .catch(err => console.log(err))
