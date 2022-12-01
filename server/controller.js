@@ -109,6 +109,26 @@ function checkAndDelete() {
     }
 }
 
+//Functions to get Doughnut Values
+const doughnutValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum from commitments where userID = ${currentUserId};`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/getDoughnutValues", doughnutValues)
+
+//Functions to get Doughnut Values
+const totalValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum from commitments and paidCommitments where userID = ${currentUserId};`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/getTotalValues", totalValues)
+
 checkAndDelete()
 
 module.exports = {
@@ -118,7 +138,9 @@ module.exports = {
     markCommitmentComplete,
     deleteCommitment,
     createUser,
-    checkLogin
+    checkLogin,
+    doughnutValues,
+    totalValues
 }; 
 
 app.listen(3737, () => console.log("Server running on 3737"));
