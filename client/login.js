@@ -22,7 +22,6 @@ document.querySelector(".closeSignupButton").addEventListener("click", function(
 //Confirm Button
 document.querySelector(".signupButton").addEventListener("click", function() {
     createUsers()
-    //TODO trigger seed function with an example commitment or two?
     document.querySelector(".signupModal").style.display = "none"
 });
 
@@ -34,7 +33,7 @@ function createUsers(username, password) {
     let { username, password } = body
     axios.put("http://localhost:3737/createUser", body)
 
-    .then(getAllCommitments())
+    .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
 
@@ -48,8 +47,8 @@ function checkLogin(username, password) {
 
     for(let i = 0; i < userArray.length; i++) {
         if(userArray[i].username === username && userArray[i].password === password){
+            document.querySelector(".currentUserId").id = `${userArray[i].id}`
             document.open(main.js);
-            //TODO set a class in main.html to the usersId at userArray[i]?  Would need to add id to all gets and queries.
         } else {
             alert("User not found!");
         }

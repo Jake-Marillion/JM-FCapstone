@@ -51,6 +51,7 @@ document.querySelector(".complete").addEventListener("click", function() {
 })
 
 const allCommitments = document.querySelector(".allCommitments")
+const currentUserId = document.querySelector(".currentUserId").id
 
 //Code that makes HTML Commitments w red borders if date is past and green if not.
 function makeCommitmentCard(commitment) {
@@ -119,7 +120,7 @@ function createCommitment(name, date, amount, isPaid, notes, userId) {
     let amount = document.querySelector(".currencyInput").value;
     let notes = document.querySelector(".noteInput").value;
     let isPaid = 1
-    //TODO how do I grab the userId??
+    let userId = currentUserId
 
     let { name, date, amount, notes, isPaid, userId } = body
     axios.put("http://localhost:3737/createCommitment", body)
@@ -134,7 +135,7 @@ function updateCommitment(name, date, amount, notes, commitmentId) {
     let date = document.querySelector(".newDateInput").value;
     let amount = document.querySelector(".newCurrencyInput").value;
     let notes = document.querySelector(".newNoteInput").value;
-    //TODO how do I grab the commitmentId??
+    //TODO how do I grab the commitmentId of the one they clicked on??
 
     let { name, date, amount, notes, commitmentId } = body
     axios.post("http://localhost:3737/updateCommitment", body)
