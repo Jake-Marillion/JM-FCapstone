@@ -47,7 +47,7 @@ function checkLogin(username, password) {
 
     for(let i = 0; i < userArray.length; i++) {
         if(userArray[i].username === username && userArray[i].password === password){
-            document.querySelector(".currentUserId").id = `${userArray[i].id}`
+            document.querySelectorAll(".currentUserId").id = `${userArray[i].id}`
             document.open(main.js);
         } else {
             alert("User not found!");

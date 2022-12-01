@@ -98,6 +98,19 @@ const checkLogin = (req, res) => {
 //Endpoint
 app.get("/checkLogin", checkLogin)
 
+//Function to check year and delete old paid
+function checkAndDelete() {
+    const currentYear = 2022
+    const yearCheck = new Date().getFullYear();
+
+    if(yearCheck > currentYear) {
+        sequelize.query(`delete * from paidCommitments;`)
+        currentYear + 1
+    }
+}
+
+checkAndDelete()
+
 module.exports = {
     getCommitments,
     createCommitment,

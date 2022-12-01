@@ -14,9 +14,10 @@ document.querySelector(".submitButton").addEventListener("click", function() {
     document.querySelector(".popModal").style.display = "none"
 });
 
-//Logout Button
+//Logout Button TODO does not work.
 document.querySelector(".logOut").addEventListener("click", function() {
-    //TODO add code here to log user out.
+    document.querySelectorAll(".currentUserId").id = "0"
+    document.open("login.html")
 });
 
 //TODO all below do not work.
