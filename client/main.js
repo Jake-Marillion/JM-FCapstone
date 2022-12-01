@@ -122,7 +122,7 @@ function createCommitment(name, date, amount, isPaid, notes, userId) {
     //TODO how do I grab the userId??
 
     let { name, date, amount, notes, isPaid, userId } = body
-    axios.post("http://localhost:3737/createCommitment", body)
+    axios.put("http://localhost:3737/createCommitment", body)
 
     .then(getAllCommitments())
     .catch(err => console.log(err))
@@ -137,7 +137,7 @@ function updateCommitment(name, date, amount, notes, commitmentId) {
     //TODO how do I grab the commitmentId??
 
     let { name, date, amount, notes, commitmentId } = body
-    axios.put("http://localhost:3737/updateCommitment", body)
+    axios.post("http://localhost:3737/updateCommitment", body)
 
     .then(getAllCommitments())
     .catch(err => console.log(err))
@@ -149,7 +149,7 @@ function markComplete(commitmentId, date, amount, userId) {
     let isPaid = 0
     let { commitmentId, date, amount, userId } = body
     //TODO Put or Post?  Or both with 2 endpoints??
-    axios.put("http://localhost:3737/markCommitmentComplete", body)
+    axios.post("http://localhost:3737/markCommitmentComplete", body)
     .then(getAllCommitments())
     .catch(err => console.log(err))
 }

@@ -83,16 +83,6 @@
   .txt_field input:valid ~ span::before{
     width: 100%;
   }
-  .pass{
-    margin: -5px 0 20px 5px;
-    color: #a6a6a6;
-    cursor: pointer;
-  }
-  .pass:hover{
-    text-decoration: underline;
-    color: rgb(2, 169, 27);
-    transition: 1.5s;
-  }
   input[type="submit"]{
     width: 100%;
     height: 50px;
@@ -161,9 +151,7 @@ input {
 .passwordInput {
   width: 200px;
 }
-.emailInput {
-  width: 200px;
-}
+
 .textColor {
   color: rgb(2, 169, 27);
 }
@@ -195,40 +183,11 @@ button:hover {
   background-color: rgb(2, 169, 27);
   color: #fff;
 }
-
-/* Forgot Password Pop-up Code */
-.forgotModal {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.65);
-  position: absolute;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  display: none;
-}
-.forgotModalContent {
-  width: 600px;
-  height: 350px;
-  background-color: rgb(77, 77, 77);
-  border-radius: 25px;
-  border: 4px solid rgb(2, 169, 27);
-  text-align: center;
-  padding: 20px;
-  position: relative;
-}
-.forgotLogo {
-  padding: 28px;
-}
+/* email */
 input {
   display: block;
   margin: 20px auto;
   height: 20px;
-}
-.emailInput {
-  width: 200px;
 }
 .textColor {
   color: rgb(2, 169, 27);

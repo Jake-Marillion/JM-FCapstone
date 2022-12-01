@@ -49,7 +49,7 @@ const updateCommitment = (req, res) => {
     .catch(err => console.log(err))
 }
 //Endpoint
-app.put("/updateCommitment", updateCommitment)
+app.post("/updateCommitment", updateCommitment)
 
 //Function to mark commitments complete
 const markCommitmentComplete = (req, res) => {
@@ -62,7 +62,7 @@ const markCommitmentComplete = (req, res) => {
     .catch(err => console.log(err))
 }
 //Endpoint
-app.put("/markCommitmentComplete", markCommitmentComplete)
+app.post("/markCommitmentComplete", markCommitmentComplete)
 
 //Function to delete commitments
 const deleteCommitment = (req, res) => {
@@ -77,16 +77,25 @@ app.delete("/deleteCommitment", deleteCommitment)
 
 //Function to create users
 const createUser = (req, res) => {
-    //TODO need to hash the pasword to send it here?
-    let { username, password, email } = req.body
+    let { username, password } = req.body
 
-    sequelize.query(`insert into users (username, password, email) values (${username}, ${password}, ${email});`)
+    sequelize.query(`insert into users (username, password) values (${username}, ${password});`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
 //Endpoint
-app.post("/createUser", createUser)
+app.put("/createUser", createUser)
+
+//Funtion to check login info
+const checkLogin = (req, res) => {
+    let data = [sequelize.query(`select * from users;`)]
+//TODO
+    // .then(res.data => res.status(200).send(res.data))
+    // .catch(err => console.log(err))
+}
+//Endpoint
+app.get("/checkLogin", checkLogin)
 
 module.exports = {
     getCommitments,
@@ -94,7 +103,8 @@ module.exports = {
     updateCommitment,
     markCommitmentComplete,
     deleteCommitment,
-    createUser
+    createUser,
+    checkLogin
 }; 
 
 app.listen(3737, () => console.log("Server running on 3737"));

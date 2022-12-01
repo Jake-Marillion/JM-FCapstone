@@ -2,7 +2,6 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
-    email VARCHAR(200) NOT NULL
 )
 
 CREATE TABLE commitments (
@@ -24,8 +23,8 @@ CREATE TABLE paidCommitments (
 );
 
 -- Admin User
-INSERT INTO users (username, password, email)
-VALUES ("adminaccount1", "adminpassword1*", "fakeemail@gmail.com");
+INSERT INTO users (username, password)
+VALUES ("adminaccount1", "adminpassword1*");
 
 INSERT INTO commitments (name, date, amount, isPaid, notes, userID)
 VALUES ("Gas", "2022-01-10", 85.00, 1, "Gas up both cars.", 1),

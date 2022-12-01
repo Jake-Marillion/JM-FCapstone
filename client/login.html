@@ -17,16 +17,15 @@
       <h1>BILLIT</h1>
       <form method="post">
         <div class="txt_field">
-          <input type="text" required>
+          <input class="loginUsernameInput" type="text" required>
           <span></span>
           <label>Username</label>
         </div>
         <div class="txt_field">
-          <input type="password" required>
+          <input class="loginPasswordInput" type="password" required>
           <span></span>
           <label>Password</label>
         </div>
-        <div class="pass">Forgot Password?</div>
         <input id="loginButton" type="submit" value="Login">
         <div class="signup_link">
           Not a member? <a href="#">Signup</a>
@@ -44,22 +43,7 @@
                   <input type="text" class="usernameInput" required/>
                   <p class="textColor">PASSWORD</p>
                   <input type="text" class="passwordInput" required/>
-                  <p class="textColor">EMAIL</p>
-                  <input type="text" class="emailInput" required/>
                   <button class="signupButton" type="submit" form="signupForm" ><span class="addHover"></span>CONFIRM</button>
-                </form>
-              </div>
-            </div>
-
-            <!-- Forgot Password Pop-up -->
-            <div class="forgotModal">
-              <div class="forgotModalContent">
-                <div class="closeForgotButton">+</div>
-                <img class="forgotLogo" src="../pictures/Logo.png" alt="logo" />
-                <form action="" id="forgotForm">
-                  <p class="textColor">We'll send you an email with your login information</p>
-                  <input type="text" class="emailInput" placeholder="email on account" required/>
-                  <button class="sendButton" type="submit" form="forgotForm" ><span class="addHover"></span>SEND</button>
                 </form>
               </div>
             </div>
