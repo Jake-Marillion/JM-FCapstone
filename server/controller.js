@@ -118,7 +118,6 @@ const doughnutValues = (req, res) => {
 }
 app.get("/getDoughnutValues", doughnutValues)
 
-//Functions to get Doughnut Values
 const totalValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum from commitments and paidCommitments where userID = ${currentUserId};`)
@@ -129,14 +128,113 @@ const totalValues = (req, res) => {
 app.get("/getTotalValues", totalValues)
 
 //Functions to get Bar Values
-const barValues = (req, res) => {
+const getJanValues = (req, res) => {
     let { currentUserId } = req.body
-    sequelize.query(`select * date and amount from commitments and paidCommitments where userID = ${currentUserId};`)
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %01-00 and %01-32;`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
-app.get("/valuesAndDates", totalValues)
+app.get("/janValues", getJanValues)
+
+const getFebValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %02-00 and %02-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/febValues", getFebValues)
+
+const getMarValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %03-00 and %03-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/marValues", getMarValues)
+
+const getAprValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %04-00 and %04-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/aprValues", getAprValues)
+
+const getMayValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %05-00 and %05-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/mayValues", getMayValues)
+
+const getJunValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %06-00 and %06-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/junValues", getJunValues)
+
+const getJulValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %07-00 and %07-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/julValues", getJulValues)
+
+const getAugValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %08-00 and %08-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/augValues", getAugValues)
+
+const getSeptValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %09-00 and %09-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/septValues", getSeptValues)
+
+const getOctValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %10-00 and %10-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/octValues", getOctValues)
+
+const getNovValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %11-00 and %11-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/novValues", getNovValues)
+
+const getDecValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %12-00 and %12-32;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/decValues", getDecValues)
 
 checkAndDelete()
 
@@ -150,7 +248,18 @@ module.exports = {
     checkLogin,
     doughnutValues,
     totalValues,
-    barValues
+    getJanValues,
+    getFebValues,
+    getMarValues,
+    getAprValues,
+    getMayValues,
+    getJunValues,
+    getJulValues,
+    getAugValues,
+    getSeptValues,
+    getOctValues,
+    getNovValues,
+    getDecValues
 }; 
 
 app.listen(3737, () => console.log("Server running on 3737"));

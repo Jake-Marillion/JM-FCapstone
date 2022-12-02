@@ -4,11 +4,56 @@ let currentUserId = document.querySelector(".currentUserId").id;
 function setBarValues() {
     let body = currentUserId
     let thisYearsStats = []
-    //TODO code to sort res.data by month.
 
-    axios.get("http://localhost:3737/valuesAndDates", body)
+    axios.get("http://localhost:3737/janValues", body)
     .then((res) => {
+        thisYearsStats(res.data)
     })
+    axios.get("http://localhost:3737/febValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+    axios.get("http://localhost:3737/marValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+    axios.get("http://localhost:3737/aprValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+    axios.get("http://localhost:3737/mayValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+    axios.get("http://localhost:3737/junValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+    axios.get("http://localhost:3737/julValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+    axios.get("http://localhost:3737/augValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+    axios.get("http://localhost:3737/septValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+    axios.get("http://localhost:3737/octValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+    axios.get("http://localhost:3737/novValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+    axios.get("http://localhost:3737/decValues", body)
+    .then((res) => {
+        thisYearsStats(res.data)
+    })
+
     document.querySelector("data").data.value = thisYearsStats
 }
 
