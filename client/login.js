@@ -1,6 +1,3 @@
-// const { mapFinderOptions } = require("sequelize/types/utils");
-//const { checkLogin } = require("../server/controller");
-// Where did the above code come from?? TODO
 const bcrypt = require("bcrypt");
 const axios = require("axios").default;
 
@@ -53,5 +50,4 @@ function checkLogin(username, password) {
             alert("User not found!");
         }
     }
-    //.catch(err => console.log(err))
 }

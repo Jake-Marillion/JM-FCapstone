@@ -20,10 +20,9 @@ document.querySelector(".logOut").addEventListener("click", function() {
     document.open("login.html")
 });
 
-//TODO all below do not work.
 //Down Arrow Button on Divs
 document.querySelector(".arrow").addEventListener("click", function () {
-    //TODO set contents equal to contents of sql object w that id.
+    //TODO set contents equal to contents of sql object from commitments with that id.
     document.querySelector(".editModal").style.display = "flex"
 })
 
@@ -47,31 +46,15 @@ document.querySelector(".deleteButton").addEventListener("click", function() {
 //Listen for complete to be clicked
 document.querySelector(".complete").addEventListener("click", function() {
     markComplete()
-    //TODO add code here to set the display value of the commitment to none?
-    //Or will removing it from the backend table do that?
 })
 
 const allCommitments = document.querySelector(".allCommitments")
 const currentUserId = document.querySelector(".currentUserId").id
 
 //Code that makes HTML Commitments w red borders if date is past and green if not.
-function makeCommitmentCard(commitment) {
+function makePastCommitmentCard(commitment) {
     const { id, name, date, amount, userId} = commitment
-
-    const commitmentCard = 
-    `<div id="${userId} class="commitment">
-    <p id="${id} class="commitmentName">${name}</p>
-    <p class="commitmentAmount">${amount}</p>
-    <p>DUE ON</p>
-    <p class="commitmentDate">${date}</p>
-      <div class="rightCommitmentSection">
-        <select class="paidSelector" name="paidSelector" id="paidSelector">
-          <option value="incomplete">incomplete</option>
-          <option class="complete" value="complete">complete</option>
-        </select>
-        <i" class="arrow down"></i>
-      </div>
-    </div>`
+    const commitmentContainer = document.querySelector(".allCommitments")
 
     const pastCommitmentCard = 
     `<div id="${userId} class="pastCommitment">
@@ -87,30 +70,44 @@ function makeCommitmentCard(commitment) {
         <i class="arrow down"></i>
       </div>
     </div>`
-    
-    //TODO I don't think line 90 works for the for loop on line 95.  I think it needs to count the responses objects.
-    let allCommitments = document.querySelectorAll(".commitment")
-    const commitmentContainer = document.querySelector(".allCommitments")
-    const today = new Date()
 
-    for(let i = 0; i < allCommitments.length; i++) {
-        if (date[i] < today) {
-            commitmentContainer.appendChild(pastCommitmentCard)
-        } else {
-            commitmentContainer.appendChild(commitmentCard)
-        }
-    }
+    commitmentContainer.innerHTML += pastCommitmentCard;
+}
+function makeCommitmentCard(commitment) {
+    const { id, name, date, amount, userId} = commitment
+    const commitmentContainer = document.querySelector(".allCommitments")
+
+    const commitmentCard = 
+    `<div id="${userId} class="commitment">
+    <p id="${id} class="commitmentName">${name}</p>
+    <p class="commitmentAmount">${amount}</p>
+    <p>DUE ON</p>
+    <p class="commitmentDate">${date}</p>
+      <div class="rightCommitmentSection">
+        <select class="paidSelector" name="paidSelector" id="paidSelector">
+          <option value="incomplete">incomplete</option>
+          <option class="complete" value="complete">complete</option>
+        </select>
+        <i" class="arrow down"></i>
+      </div>
+    </div>`
+    
+    commitmentContainer.innerHTML += commitmentCard;
 }
 function getAllCommitments() {
     axios.get("http://localhost:3737/commitments")
-    .then(res => {
-        res.data.forEach(commitment => {
-            const commitmentCard = makeCommitmentCard(commitment)
-//TODO is this nesecary with the above if statement?  Should the if statement go here? 
-//Because this doesn't take into account past bills as currently is.
-            allCommitments.innerHTML += commitmentCard
+    .then((res) => {
+            let allCommitments = res.data
+            const today = new Date()
+        
+            for(let i = 0; i < allCommitments.length; i++) {
+                if (date[i] < today) {
+                    makePastCommitmentCard(allCommitments[i]);
+                } else {
+                    makeCommitmentCard(allCommitments[i]);
+                }
+            }
         })
-    })
     .catch(err => console.log(err))
 }
 

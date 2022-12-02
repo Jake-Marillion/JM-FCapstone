@@ -1,4 +1,4 @@
-//let currentUserId = document.querySelector(".currentUserId").id;
+let currentUserId = document.querySelector(".currentUserId").id;
 
 //Sets Bar Graph Values
 function setBarValues() {
@@ -16,14 +16,14 @@ function setDonutValues() {
 
     axios.get("http://localhost:3737/getTotalValues", body)
     .then((res) => {
-        //res.data may be an array
+        //TODO res.data may be an array
         console.log(res.data)
         totalMoney = res.data 
         })
 
     axios.get("http://localhost:3737/getDoughnutValues", body)
     .then((res) => {
-        //res.data may be an array
+        //TODO res.data may be an array
         console.log(res.data)
         thisMonthPaidCommitments = res.data * 100 / totalMoney
         thisMonthUnpaidCommitments = 100 - thisMonthPaidCommitments 
@@ -32,7 +32,6 @@ function setDonutValues() {
     .catch(err => console.log(err))
 }
 
-//Logout Button TODO does not work in this or main.js/html
 document.querySelector(".logOut").addEventListener("click", function() {
     document.querySelectorAll(".currentUserId").id = "0"
     document.open("login.html")
