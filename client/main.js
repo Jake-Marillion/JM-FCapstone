@@ -133,7 +133,7 @@ function updateCommitment(name, date, amount, notes, commitmentId) {
     let date = document.querySelector(".newDateInput").value;
     let amount = document.querySelector(".newCurrencyInput").value;
     let notes = document.querySelector(".newNoteInput").value;
-    //TODO how do I grab the commitmentId of the one they clicked on??
+//TODO how to grab the id of what was brought up.
 
     let { name, date, amount, notes, commitmentId } = body
     axios.post("http://localhost:3737/updateCommitment", body)
@@ -144,10 +144,9 @@ function updateCommitment(name, date, amount, notes, commitmentId) {
 
 //Code to mark a Commitment as Complete and remove it from the DOM.
 function markComplete(commitmentId, date, amount, userId) {
-    //TODO how do I grab the commitmentId, date, amount, and userId of what was clicked?
+//TODO how do I grab the classes of the commitment they grabbed.
     let isPaid = 0
     let { commitmentId, date, amount, userId } = body
-    //TODO Put or Post?  Or both with 2 endpoints??
     axios.post("http://localhost:3737/markCommitmentComplete", body)
     .then(getAllCommitments())
     .catch(err => console.log(err))

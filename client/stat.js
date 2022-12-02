@@ -2,8 +2,13 @@ let currentUserId = document.querySelector(".currentUserId").id;
 
 //Sets Bar Graph Values
 function setBarValues() {
+    let body = currentUserId
     let thisYearsStats = []
-    //TODO code to get and sort and push into array this years values.
+    //TODO code to sort res.data by month.
+
+    axios.get("http://localhost:3737/valuesAndDates", body)
+    .then((res) => {
+    })
     document.querySelector("data").data = thisYearsStats
 }
 

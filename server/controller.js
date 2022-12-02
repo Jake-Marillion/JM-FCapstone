@@ -8,7 +8,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-console.log(CONNECTION_STRING)
 const sequelize = new Sequelize(CONNECTION_STRING, {
     dialect: 'postgres',
     dialectOptions: {
@@ -92,9 +91,8 @@ app.put("/createUser", createUser)
 //Funtion to check login info
 const checkLogin = (req, res) => {
     let data = [sequelize.query(`select * from users;`)]
-//TODO
-    // .then(res.data => res.status(200).send(res.data))
-    // .catch(err => console.log(err))
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
 }
 //Endpoint
 app.get("/checkLogin", checkLogin)
@@ -130,6 +128,16 @@ const totalValues = (req, res) => {
 }
 app.get("/getTotalValues", totalValues)
 
+//Functions to get Bar Values
+const barValues = (req, res) => {
+    let { currentUserId } = req.body
+    sequelize.query(`select * date and amount from commitments and paidCommitments where userID = ${currentUserId};`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+app.get("/valuesAndDates", totalValues)
+
 checkAndDelete()
 
 module.exports = {
@@ -141,7 +149,8 @@ module.exports = {
     createUser,
     checkLogin,
     doughnutValues,
-    totalValues
+    totalValues,
+    barValues
 }; 
 
 app.listen(3737, () => console.log("Server running on 3737"));
