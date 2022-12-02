@@ -9,7 +9,7 @@ function setBarValues() {
     axios.get("http://localhost:3737/valuesAndDates", body)
     .then((res) => {
     })
-    document.querySelector("data").data = thisYearsStats
+    document.querySelector("data").data.value = thisYearsStats
 }
 
 //Sets Donut Graph Values TODO does this work?
