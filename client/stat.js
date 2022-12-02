@@ -1,4 +1,4 @@
-let currentUserId = document.querySelector(".currentUserId").id;
+//let currentUserId = document.querySelector(".currentUserId").id;
 
 //Sets Bar Graph Values
 function setBarValues() {
@@ -15,12 +15,16 @@ function setDonutValues() {
     let totalMoney = 0
 
     axios.get("http://localhost:3737/getTotalValues", body)
-    .then(res => res.data => {
+    .then((res) => {
+        //res.data may be an array
+        console.log(res.data)
         totalMoney = res.data 
         })
 
     axios.get("http://localhost:3737/getDoughnutValues", body)
-    .then(res => res.data => {
+    .then((res) => {
+        //res.data may be an array
+        console.log(res.data)
         thisMonthPaidCommitments = res.data * 100 / totalMoney
         thisMonthUnpaidCommitments = 100 - thisMonthPaidCommitments 
         })

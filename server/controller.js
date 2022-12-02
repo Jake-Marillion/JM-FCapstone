@@ -1,13 +1,14 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv").config();
+const {CONNECTION_STRING} = process.env;
 const axios = require("axios").default;
 const Sequelize = require("sequelize");
-const bcrypt = require("bcrypt")
 const app = express();
 app.use(express.json());
 app.use(cors());
 
+console.log(CONNECTION_STRING)
 const sequelize = new Sequelize(CONNECTION_STRING, {
     dialect: 'postgres',
     dialectOptions: {
