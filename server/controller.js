@@ -21,7 +21,7 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 //Function to get commitments
 const getCommitments = (req, res) => {
 
-    sequelize.query(`select * from commitments where isPaid=1 and commitments.userID = 1 order by date desc;`)
+    sequelize.query(`select * from commitments where isPaid=1 and ${userId}=commitments.userID order by date desc;`)
     
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
