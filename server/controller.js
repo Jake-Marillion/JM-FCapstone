@@ -21,8 +21,8 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 //Function to get commitments
 const getCommitments = (req, res) => {
 
-    sequelize.query(`select * from commitments where isPaid=1 and ${userId}=commitments.userID order by date desc;`)
-
+    sequelize.query(`select * from commitments where isPaid=1 and commitments.userID = 1 order by date desc;`)
+    
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -33,6 +33,7 @@ app.get("/commitments", getCommitments)
 const createCommitment = (req, res) => {
     let { name, date, amount, notes, userId } = req.body
     const isPaid = 1
+   
     sequelize.query(`insert into commitments (name, date, amount, isPaid, notes, userId) values (${name}, ${date}, ${amount}, ${isPaid}, ${notes}, ${userId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
@@ -44,6 +45,7 @@ app.post("/createCommitment", createCommitment)
 //Function to update commitments
 const updateCommitment = (req, res) => {
     let { name, date, amount, notes, commitmentId } = req.body
+    
     sequelize.query(`update commitments set name = ${name}, set date = ${date}, set amount = ${amount}, set notes = ${notes}, where ${commitmentId}=commitments.id AND ${userId}=commitments.userId;`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
@@ -56,6 +58,7 @@ app.post("/updateCommitment", updateCommitment)
 const markCommitmentComplete = (req, res) => {
     let { commitmentId, date, amount, userId } = req.body
     let isPaid = 0
+   
     sequelize.query(`insert into paidCommitments (date, amount, isPaid, userId) values (${date}, ${amount}, ${isPaid}, ${userId});`)
     sequelize.query(`delete * from commitments where id=${commitmentId};`)
 
@@ -68,6 +71,7 @@ app.post("/markCommitmentComplete", markCommitmentComplete)
 //Function to delete commitments
 const deleteCommitment = (req, res) => {
     let { commitmentId } = req.body
+    
     sequelize.query(`delete * from commitments where id=${commitmentId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
@@ -90,7 +94,9 @@ app.put("/createUser", createUser)
 
 //Funtion to check login info
 const checkLogin = (req, res) => {
-    let data = [sequelize.query(`select * from users;`)]
+    
+    sequelize.query(`select * from users;`)
+    
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -111,6 +117,7 @@ function checkAndDelete() {
 //Functions to get Doughnut Values
 const doughnutValues = (req, res) => {
     let { currentUserId } = req.body
+    
     sequelize.query(`select sum from commitments where userID = ${currentUserId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
@@ -120,6 +127,7 @@ app.get("/getDoughnutValues", doughnutValues)
 
 const totalValues = (req, res) => {
     let { currentUserId } = req.body
+   
     sequelize.query(`select sum from commitments and paidCommitments where userID = ${currentUserId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
@@ -131,7 +139,6 @@ app.get("/getTotalValues", totalValues)
 const getJanValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %01-00 and %01-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -140,7 +147,6 @@ app.get("/janValues", getJanValues)
 const getFebValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %02-00 and %02-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -149,7 +155,6 @@ app.get("/febValues", getFebValues)
 const getMarValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %03-00 and %03-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -158,7 +163,6 @@ app.get("/marValues", getMarValues)
 const getAprValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %04-00 and %04-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -167,7 +171,6 @@ app.get("/aprValues", getAprValues)
 const getMayValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %05-00 and %05-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -176,7 +179,6 @@ app.get("/mayValues", getMayValues)
 const getJunValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %06-00 and %06-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -185,7 +187,6 @@ app.get("/junValues", getJunValues)
 const getJulValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %07-00 and %07-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -194,7 +195,6 @@ app.get("/julValues", getJulValues)
 const getAugValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %08-00 and %08-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -203,7 +203,6 @@ app.get("/augValues", getAugValues)
 const getSeptValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %09-00 and %09-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -212,7 +211,6 @@ app.get("/septValues", getSeptValues)
 const getOctValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %10-00 and %10-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -221,7 +219,6 @@ app.get("/octValues", getOctValues)
 const getNovValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %11-00 and %11-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -230,7 +227,6 @@ app.get("/novValues", getNovValues)
 const getDecValues = (req, res) => {
     let { currentUserId } = req.body
     sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId} and where date between %12-00 and %12-32;`)
-
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
