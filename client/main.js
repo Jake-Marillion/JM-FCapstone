@@ -1,5 +1,5 @@
 //TODO all my axios calls are referencing local host.  Should 
-//it be a Heroku url??
+//it be a Heroku url or heroku dns target??
 
 //Add Commitment Button
 document.getElementById("addButton").addEventListener("click", function() {
@@ -13,7 +13,7 @@ document.querySelector(".closeButton").addEventListener("click", function() {
 
 //Submit Button on Add Commitment Popup
 document.querySelector(".submitButton").addEventListener("click", function() {
-    createCommitment(name, date, amount, notes, userId)
+    createCommitment(innerHTML)
     document.querySelector(".popModal").style.display = "none"
 });
 
@@ -139,14 +139,13 @@ function createCommitment(name, date, amount, isPaid, notes, userId) {
 }
 
 //Code to Update Commitments TODO
-function updateCommitment(name, date, amount, notes, commitmentId) {
+function updateCommitment(name, date, amount, notes, clickedElementId, currentUserId) {
     let name = document.querySelector(".newNameInput").value;
     let date = document.querySelector(".newDateInput").value;
     let amount = document.querySelector(".newCurrencyInput").value;
     let notes = document.querySelector(".newNoteInput").value;
-//TODO how to grab the id of what was brought up.
 
-    let { name, date, amount, notes, commitmentId } = body
+    let { name, date, amount, notes, clickedElementId, currentUserId } = body
     axios.post("http://localhost:3737/updateCommitment", body)
 
     .then(getAllCommitments())
@@ -154,20 +153,23 @@ function updateCommitment(name, date, amount, notes, commitmentId) {
 }
 
 //Code to mark a Commitment as Complete and remove it from the DOM.
-function markComplete(commitmentId, date, amount, userId) {
-//TODO how do I grab the classes of the commitment they grabbed.
+function markComplete(commitmentId, date, amount, currentUserId) {
+//TODO how do I grab the classes of the commitment they grabbed to get their inputs..
     let isPaid = 0
-    let { commitmentId, date, amount, userId } = body
+    let { commitmentId, date, amount, currentUserId } = body
+
     axios.post("http://localhost:3737/markCommitmentComplete", body)
+
     .then(getAllCommitments())
     .catch(err => console.log(err))
 }
 
 //Code to Delete Commitments TODO
-function deleteCommitment(commitmentId) {
-    //TODO how do I grab the commitmentId of what was brought up?
-    let { commitmentId } = body
+function deleteCommitment(clickedElementId) {
+    let { clickedElementId } = body
+
     axios.delete("http://localhost:3737/deleteCommitment", body)
+
     .then(getAllCommitments())
     .catch(err => console.log(err))
 }

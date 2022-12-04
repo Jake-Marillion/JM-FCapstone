@@ -44,7 +44,7 @@ app.post("/createCommitment", createCommitment)
 
 //Function to update commitments
 const updateCommitment = (req, res) => {
-    let { name, date, amount, notes, commitmentId } = req.body
+    let { name, date, amount, notes, commitmentId, userId } = req.body
     
     sequelize.query(`update commitments set name = ${name}, set date = ${date}, set amount = ${amount}, set notes = ${notes}, where ${commitmentId}=commitments.id AND ${userId}=commitments.userId;`)
 
