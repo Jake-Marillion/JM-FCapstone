@@ -118,7 +118,7 @@ function checkAndDelete() {
 const doughnutValues = (req, res) => {
     let { currentUserId } = req.body
     
-    sequelize.query(`select sum from commitments where userID = ${currentUserId};`)
+    sequelize.query(`select sum(amount) from commitments where userID = ${currentUserId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -128,7 +128,7 @@ app.get("/getDoughnutValues", doughnutValues)
 const totalValues = (req, res) => {
     let { currentUserId } = req.body
    
-    sequelize.query(`select sum from commitments and paidCommitments where userID = ${currentUserId};`)
+    sequelize.query(`select sum(amount) from commitments and paidCommitments where userID = ${currentUserId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -232,6 +232,18 @@ const getDecValues = (req, res) => {
 }
 app.get("/decValues", getDecValues)
 
+//Code to get info for Edit Popup
+const getClickedCommitment = (req, res) => {
+    let { commitmentId } = req.body
+
+    sequelize.query(`select name, date, amount, notes from commitments where id = ${commitmentId};`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+//Endpoint
+app.get("/getClickedCommitment", getClickedCommitment)
+
 checkAndDelete()
 
 module.exports = {
@@ -255,7 +267,8 @@ module.exports = {
     getSeptValues,
     getOctValues,
     getNovValues,
-    getDecValues
+    getDecValues,
+    getClickedCommitment
 }; 
 
 app.listen(3737, () => console.log("Server running on 3737"));

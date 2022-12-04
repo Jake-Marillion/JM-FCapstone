@@ -1,3 +1,6 @@
+//TODO all my axios calls are referencing local host.  Should 
+//it be a Heroku url??
+
 //Add Commitment Button
 document.getElementById("addButton").addEventListener("click", function() {
     document.querySelector(".popModal").style.display = "flex"
@@ -21,8 +24,16 @@ document.querySelector(".logOut").addEventListener("click", function() {
 });
 
 //Down Arrow Button on Divs
+let clickedElementId = 0
 document.querySelector(".arrow").addEventListener("click", function () {
-    //TODO set contents equal to contents of sql object from commitments with that id.
+    clickedElementId = Event.AT_TARGET.p.id
+    let { clickedElementId } = body
+    // ^ would be the commitment id. 
+    axios.get("http://localhost:3737/getClickedCommitment", body)
+
+    .then(populateEditModal(res.data))
+    .catch(err => console.log(err))
+
     document.querySelector(".editModal").style.display = "flex"
 })
 
@@ -159,6 +170,15 @@ function deleteCommitment(commitmentId) {
     axios.delete("http://localhost:3737/deleteCommitment", body)
     .then(getAllCommitments())
     .catch(err => console.log(err))
+}
+
+//Code to populate the Edit Popup
+function populateEditModal(){
+    let { name, date, amount, notes } = res.data
+    document.querySelector(".newNameInput").input = name
+    document.querySelector(".newDateInput").input = date
+    document.querySelector(".newCurrencyInput").input = amount
+    document.querySelector(".newNoteInput").input = notes
 }
 
 getAllCommitments()
