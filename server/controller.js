@@ -16,7 +16,6 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
         }
     }
 });
-//TODO add the userId element of HTML to this file and the main.js file.
 
 //Function to get commitments
 const getCommitments = (req, res) => {

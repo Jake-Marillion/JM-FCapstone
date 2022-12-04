@@ -138,7 +138,7 @@ function createCommitment(name, date, amount, isPaid, notes, userId) {
     .catch(err => console.log(err))
 }
 
-//Code to Update Commitments TODO
+//Code to Update Commitments 
 function updateCommitment(name, date, amount, notes, clickedElementId, currentUserId) {
     let name = document.querySelector(".newNameInput").value;
     let date = document.querySelector(".newDateInput").value;
@@ -164,7 +164,7 @@ function markComplete(commitmentId, date, amount, currentUserId) {
     .catch(err => console.log(err))
 }
 
-//Code to Delete Commitments TODO
+//Code to Delete Commitments
 function deleteCommitment(clickedElementId) {
     let { clickedElementId } = body
 
