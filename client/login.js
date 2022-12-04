@@ -28,7 +28,7 @@ function createUsers(username, password) {
     let password = bcrypt.hashSync(document.querySelector(".passwordInput").value);
 
     let { username, password } = body
-    axios.put("http://localhost:3737/createUser", body)
+    axios.put("/createUser", body)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -39,7 +39,7 @@ function checkLogin(username, password) {
     let username = document.querySelector(".loginUsernameInput").value;
     let password = bcrypt.hashSync(document.querySelector(".loginPasswordInput").value);
 
-    axios.get("http://localhost:3737/checkLogin")
+    axios.get("/checkLogin")
     let userArray = [resp.data]
 
     for(let i = 0; i < userArray.length; i++) {

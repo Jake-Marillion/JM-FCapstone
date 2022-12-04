@@ -5,51 +5,51 @@ function setBarValues() {
     let body = currentUserId
     let thisYearsStats = []
 
-    axios.get("http://localhost:3737/janValues", body)
+    axios.get("/janValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/febValues", body)
+    axios.get("/febValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/marValues", body)
+    axios.get("/marValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/aprValues", body)
+    axios.get("/aprValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/mayValues", body)
+    axios.get("/mayValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/junValues", body)
+    axios.get("/junValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/julValues", body)
+    axios.get("/julValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/augValues", body)
+    axios.get("/augValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/septValues", body)
+    axios.get("/septValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/octValues", body)
+    axios.get("/octValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/novValues", body)
+    axios.get("/novValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
-    axios.get("http://localhost:3737/decValues", body)
+    axios.get("/decValues", body)
     .then((res) => {
         thisYearsStats(res.data)
     })
@@ -64,14 +64,14 @@ function setDonutValues() {
     let body = currentUserId
     let totalMoney = 0
 
-    axios.get("http://localhost:3737/getTotalValues", body)
+    axios.get("/getTotalValues", body)
     .then((res) => {
         //TODO res.data may be an array
         console.log(res.data)
         totalMoney = res.data 
         })
 
-    axios.get("http://localhost:3737/getDoughnutValues", body)
+    axios.get("/getDoughnutValues", body)
     .then((res) => {
         //TODO res.data may be an array
         console.log(res.data)

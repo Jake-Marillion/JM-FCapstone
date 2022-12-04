@@ -1,6 +1,3 @@
-//TODO all my axios calls are referencing local host.  Should 
-//it be a Heroku url or heroku dns target??
-
 //Add Commitment Button
 document.getElementById("addButton").addEventListener("click", function() {
     document.querySelector(".popModal").style.display = "flex"
@@ -29,7 +26,7 @@ document.querySelector(".arrow").addEventListener("click", function () {
     clickedElementId = Event.AT_TARGET.p.id
     let { clickedElementId } = body
     // ^ would be the commitment id. 
-    axios.get("http://localhost:3737/getClickedCommitment", body)
+    axios.get("/getClickedCommitment", body)
 
     .then(populateEditModal(res.data))
     .catch(err => console.log(err))
@@ -106,7 +103,7 @@ function makeCommitmentCard(commitment) {
     commitmentContainer.innerHTML += commitmentCard;
 }
 function getAllCommitments() {
-    axios.get("http://localhost:3737/commitments")
+    axios.get("/commitments")
     .then((res) => {
             let allCommitments = res.data
             const today = new Date()
@@ -132,7 +129,7 @@ function createCommitment(name, date, amount, isPaid, notes, userId) {
     let userId = currentUserId
 
     let { name, date, amount, notes, isPaid, userId } = body
-    axios.put("http://localhost:3737/createCommitment", body)
+    axios.put("/createCommitment", body)
 
     .then(getAllCommitments())
     .catch(err => console.log(err))
@@ -146,7 +143,7 @@ function updateCommitment(name, date, amount, notes, clickedElementId, currentUs
     let notes = document.querySelector(".newNoteInput").value;
 
     let { name, date, amount, notes, clickedElementId, currentUserId } = body
-    axios.post("http://localhost:3737/updateCommitment", body)
+    axios.post("/updateCommitment", body)
 
     .then(getAllCommitments())
     .catch(err => console.log(err))
@@ -158,7 +155,7 @@ function markComplete(commitmentId, date, amount, currentUserId) {
     let isPaid = 0
     let { commitmentId, date, amount, currentUserId } = body
 
-    axios.post("http://localhost:3737/markCommitmentComplete", body)
+    axios.post("/markCommitmentComplete", body)
 
     .then(getAllCommitments())
     .catch(err => console.log(err))
@@ -168,7 +165,7 @@ function markComplete(commitmentId, date, amount, currentUserId) {
 function deleteCommitment(clickedElementId) {
     let { clickedElementId } = body
 
-    axios.delete("http://localhost:3737/deleteCommitment", body)
+    axios.delete("/deleteCommitment", body)
 
     .then(getAllCommitments())
     .catch(err => console.log(err))
