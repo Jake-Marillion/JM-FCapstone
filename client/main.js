@@ -17,7 +17,7 @@ document.querySelector(".submitButton").addEventListener("click", function() {
 //Logout Button TODO does not work.
 document.querySelector(".logOut").addEventListener("click", function() {
     document.querySelectorAll(".currentUserId").id = "0"
-    document.open("login.html")
+    window.location.href = "../login.html"
 });
 
 //Down Arrow Button on Divs

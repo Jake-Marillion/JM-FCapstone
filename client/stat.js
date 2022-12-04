@@ -84,7 +84,7 @@ function setDonutValues() {
 
 document.querySelector(".logOut").addEventListener("click", function() {
     document.querySelectorAll(".currentUserId").id = "0"
-    document.open("login.html")
+    window.location.href = "../login.html"
 });
 
 setBarValues()
