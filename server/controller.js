@@ -33,7 +33,7 @@ app.get('/commitments/:id', getCommitments)
 const createCommitment = (req, res) => {
     let { name, date, amount, notes, isPaid, userId } = req.body
    
-    sequelize.query(`insert into commitments (name, date, amount, isPaid, notes, userId) values (${name}, ${date}, ${amount}, ${isPaid}, ${notes}, ${userId};`)
+    sequelize.query(`insert into commitments (name, date, amount, isPaid, notes, userID) values (${name}, ${date}, ${amount}, ${isPaid}, ${notes}, ${userId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -43,9 +43,9 @@ app.post('/createCommitment', createCommitment)
 
 //Function to update commitments
 const updateCommitment = (req, res) => {
-    let { name, date, amount, notes, commitmentId, userId } = req.body
-    //TODO should update be insert into ?
-    sequelize.query(`update commitments set name = ${name}, set date = ${date}, set amount = ${amount}, set notes = ${notes} where ${commitmentId}=commitments.id AND ${userId}=commitments.userId;`)
+    let { name, date, amount, notes, commitmentId } = req.body
+
+    sequelize.query(`update commitments set name=${name}, set date=${date}, set amount=${amount}, set notes=${notes} where ${commitmentId}=commitments.id;`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -55,10 +55,9 @@ app.post('/updateCommitment', updateCommitment)
 
 //Function to mark commitments complete
 const markCommitmentComplete = (req, res) => {
-    let { commitmentId, currentUserId } = req.body
-    let isPaid = 0
-    //TODO should update be insert into ?
-    sequelize.query(`update commitments set isPaid = ${isPaid} where ${commitmentId}=commitments.id AND ${currentUserId}=commitments.userId;`)
+    let { commitmentId } = req.body
+
+    sequelize.query(`update commitments set isPaid=true where ${commitmentId}=commitments.id;`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -68,9 +67,9 @@ app.post('/markCommitmentComplete', markCommitmentComplete)
 
 //Function to delete commitments
 const deleteCommitment = (req, res) => {
-    let { commitmentId } = req.body
+    let { clickedElementId } = req.body
     
-    sequelize.query(`delete * from commitments where id=${commitmentId};`)
+    sequelize.query(`delete * from commitments where id=${clickedElementId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))

@@ -14,7 +14,7 @@ document.querySelector(".submitButton").addEventListener("click", function() {
     document.querySelector(".popModal").style.display = "none"
 });
 
-//Logout Button TODO does not work.
+//Logout Button.
 document.querySelector(".logOut").addEventListener("click", function() {
     document.querySelectorAll(".currentUserId").id = "0"
     window.location.href = "../login.html"
@@ -39,6 +39,7 @@ document.querySelector(".deleteButton").addEventListener("click", function(e) {
 
 const allCommitments = document.querySelector(".allCommitments")
 const currentUserId = document.querySelector(".currentUserId").id
+let clickedElementId = 0
 
 //Code that makes HTML Commitments w red borders if date is past and green if not.
 function makePastCommitmentCard(commitment) {
@@ -62,7 +63,6 @@ function makePastCommitmentCard(commitment) {
       </div>`
 
     //Down Arrow Button on Divs
-    let clickedElementId = 0
     pastCommitmentCard.querySelector(".arrow").addEventListener("click", function () {
         clickedElementId = Event.AT_TARGET.p.id
         let { clickedElementId } = body
@@ -77,7 +77,8 @@ function makePastCommitmentCard(commitment) {
 
 //Listen for complete to be clicked
 pastCommitmentCard.querySelector(".complete").addEventListener("click", function(e) {
-    markComplete()
+    clickedElementId = Event.AT_TARGET.p.id
+    markComplete(clickedElementId)
 })
 
     commitmentContainer.appendChild(pastCommitmentCard)
@@ -134,7 +135,7 @@ function createCommitment() {
 
     let body = { name, date, amount, notes, isPaid, userId };
     axios.put("/createCommitment", body)
-
+    //TODO do I need to call getAllCommitments here like I am??
     .then(getAllCommitments())
     .catch(err => console.log(err))
 }
@@ -146,7 +147,7 @@ function updateCommitment(clickedElementId) {
     let amount = document.querySelector(".newCurrencyInput").value;
     let notes = document.querySelector(".newNoteInput").value;
 
-    let body = { name, date, amount, notes, clickedElementId, currentUserId }
+    let body = { name, date, amount, notes, clickedElementId }
     axios.post("/updateCommitment", body)
 
     .then(getAllCommitments())
@@ -155,12 +156,10 @@ function updateCommitment(clickedElementId) {
 
 //Code to mark a Commitment as Complete and remove it from the DOM.
 function markComplete(commitmentId) {
-//TODO how do I grab the classes of the commitment they grabbed to get their inputs..
-//e.target.classname?
-    let body = { commitmentId, currentUserId }
+    let body = { commitmentId }
 
     axios.post("/markCommitmentComplete", body)
-
+    //TODO do I need to call getAllCommitments here like I am??
     .then(getAllCommitments())
     .catch(err => console.log(err))
 }
