@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const {CONNECTION_STRING} = process.env;
+const {PORT} = process.env;
 const axios = require('axios').default;
 const Sequelize = require('sequelize');
 const app = express();
@@ -30,8 +31,7 @@ app.get('/commitments/:id', getCommitments)
 
 //Function to create commitments
 const createCommitment = (req, res) => {
-    let { name, date, amount, notes, userId } = req.body
-    const isPaid = 1
+    let { name, date, amount, notes, isPaid, userId } = req.body
    
     sequelize.query(`insert into commitments (name, date, amount, isPaid, notes, userId) values (${name}, ${date}, ${amount}, ${isPaid}, ${notes}, ${userId};`)
 
@@ -44,8 +44,8 @@ app.post('/createCommitment', createCommitment)
 //Function to update commitments
 const updateCommitment = (req, res) => {
     let { name, date, amount, notes, commitmentId, userId } = req.body
-    
-    sequelize.query(`update commitments set name = ${name}, set date = ${date}, set amount = ${amount}, set notes = ${notes}, where ${commitmentId}=commitments.id AND ${userId}=commitments.userId;`)
+    //TODO should update be insert into ?
+    sequelize.query(`update commitments set name = ${name}, set date = ${date}, set amount = ${amount}, set notes = ${notes} where ${commitmentId}=commitments.id AND ${userId}=commitments.userId;`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -55,11 +55,10 @@ app.post('/updateCommitment', updateCommitment)
 
 //Function to mark commitments complete
 const markCommitmentComplete = (req, res) => {
-    let { commitmentId, date, amount, userId } = req.body
+    let { commitmentId, currentUserId } = req.body
     let isPaid = 0
-   
-    sequelize.query(`insert into paidCommitments (date, amount, isPaid, userId) values (${date}, ${amount}, ${isPaid}, ${userId});`)
-    sequelize.query(`delete * from commitments where id=${commitmentId};`)
+    //TODO should update be insert into ?
+    sequelize.query(`update commitments set isPaid = ${isPaid} where ${commitmentId}=commitments.id AND ${currentUserId}=commitments.userId;`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -233,6 +232,19 @@ const getClickedCommitment = (req, res) => {
 //Endpoint
 app.post('/getClickedCommitment', getClickedCommitment)
 
+//Function to check year and delete old paid commitments
+function checkAndDelete() {
+    const currentYear = 2022
+    const yearCheck = new Date().getFullYear();
+
+    if(yearCheck > currentYear) {
+        sequelize.query(`delete * from commitments where isPaid=true;`)
+        currentYear + 1
+    }
+}
+checkAndDelete()
+
+//Code to seed Admin User
 app.post('/seed', (req, res) => {
     sequelize.query(`
     drop table if exists commitments;
@@ -299,4 +311,4 @@ module.exports = {
     getClickedCommitment
 }; 
 
-app.listen(3737, () => console.log('Server running on 3737'));
+app.listen(3737, () => console.log(`Server running on ${PORT}`));

@@ -103,7 +103,10 @@ function makeCommitmentCard(commitment) {
     
     commitmentContainer.innerHTML += commitmentCard;
 }
+
+//Code to get and filter/sort Commitments
 function getAllCommitments() {
+    //TODO this URL is hardcoded for user 1.  
     axios.get("http://localhost:3737/commitments/1")
     .then((res) => {
             let allCommitments = res.data
@@ -126,7 +129,7 @@ function createCommitment() {
     let date = document.querySelector(".dateInput").value;
     let amount = document.querySelector(".currencyInput").value;
     let notes = document.querySelector(".noteInput").value;
-    let isPaid = 1
+    let isPaid = false
     let userId = currentUserId
 
     let body = { name, date, amount, notes, isPaid, userId };
@@ -153,6 +156,7 @@ function updateCommitment(clickedElementId) {
 //Code to mark a Commitment as Complete and remove it from the DOM.
 function markComplete(commitmentId) {
 //TODO how do I grab the classes of the commitment they grabbed to get their inputs..
+//e.target.classname?
     let body = { commitmentId, currentUserId }
 
     axios.post("/markCommitmentComplete", body)

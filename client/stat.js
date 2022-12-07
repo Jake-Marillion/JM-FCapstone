@@ -1,4 +1,5 @@
 const baseURL = 'http://localhost:3737'
+
 //Sets Bar Graph Values
 async function setBarValues() {
     let body = { currentUserId: 1 }
@@ -21,6 +22,7 @@ async function setBarValues() {
 
     monthRes.forEach(res => thisYearsStats.push(res.data[0].sum));
     console.log({ thisYearsStats });
+
     //Bar Chart
     // setup
     const data = {
@@ -70,6 +72,7 @@ async function setBarValues() {
 
 }
 
+//Sets Donut Graph Values
 function setDonutValues() {
     let thisMonthUnpaidCommitments = 50
     let thisMonthPaidCommitments = 50
@@ -78,15 +81,14 @@ function setDonutValues() {
 
     axios.post(baseURL + "/getTotalValues", body)
     .then((res) => {
-        //TODO res.data may be an array
         console.log(res.data)
         totalMoney = res.data[0].sum 
         axios.post(baseURL + "/getDoughnutValues", body)
         .then(({ data }) => {
-            //TODO res.data may be an array
             thisMonthPaidCommitments = data[0].sum * 100 / totalMoney
             thisMonthUnpaidCommitments = 100 - thisMonthPaidCommitments 
-            // Doughtnut Chart
+            
+    // Doughtnut Chart
     // setup
     console.log([thisMonthUnpaidCommitments, thisMonthPaidCommitments])
     const dataDoughnut = {
