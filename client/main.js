@@ -20,41 +20,22 @@ document.querySelector(".logOut").addEventListener("click", function() {
     window.location.href = "../login.html"
 });
 
-//Down Arrow Button on Divs
-let clickedElementId = 0
-document.querySelector(".arrow").addEventListener("click", function () {
-    clickedElementId = Event.AT_TARGET.p.id
-    let { clickedElementId } = body
-    // ^ would be the commitment id. 
-    axios.get("/getClickedCommitment", body)
-
-    .then(populateEditModal(res.data))
-    .catch(err => console.log(err))
-
-    document.querySelector(".editModal").style.display = "flex"
-})
-
 //Close Edit Popup Button
 document.querySelector(".closeEditButton").addEventListener("click", function() {
     document.querySelector(".editModal").style.display = "none"
 });
 
 //Update Button on Edit Commitment Popup
-document.querySelector(".updateButton").addEventListener("click", function() {
-    updateCommitment(innerHTML)
+document.querySelector(".updateButton").addEventListener("click", function(e) {
+    updateCommitment(e.target.id)
     document.querySelector(".editModal").style.display = "none"
 });
 
 //Delete Button on Edit Commitment Popup
-document.querySelector(".deleteButton").addEventListener("click", function() {
-    deleteCommitment(innerHTML)
+document.querySelector(".deleteButton").addEventListener("click", function(e) {
+    deleteCommitment(e.target.id)
     document.querySelector(".editModal").style.display = "none"
 });
-
-//Listen for complete to be clicked
-document.querySelector(".complete").addEventListener("click", function() {
-    markComplete()
-})
 
 const allCommitments = document.querySelector(".allCommitments")
 const currentUserId = document.querySelector(".currentUserId").id
@@ -63,9 +44,11 @@ const currentUserId = document.querySelector(".currentUserId").id
 function makePastCommitmentCard(commitment) {
     const { id, name, date, amount, userId} = commitment
     const commitmentContainer = document.querySelector(".allCommitments")
-
-    const pastCommitmentCard = 
-    `<div id="${userId} class="pastCommitment">
+    
+    const pastCommitmentCard = document.createElement('div');
+    pastCommitmentCard.className = "pastCommitment"
+    pastCommitmentCard.id = userId;
+    pastCommitmentCard.innerHTML =`
     <p id="${id}" class="commitmentName">${name}</p>
     <p class="commitmentAmount">${amount}</p>
     <p>DUE ON</p>
@@ -76,17 +59,35 @@ function makePastCommitmentCard(commitment) {
           <option class="complete" value="complete">complete</option>
         </select>
         <i class="arrow down"></i>
-      </div>
-    </div>`
+      </div>`
 
-    commitmentContainer.innerHTML += pastCommitmentCard;
+    //Down Arrow Button on Divs
+    let clickedElementId = 0
+    pastCommitmentCard.querySelector(".arrow").addEventListener("click", function () {
+        clickedElementId = Event.AT_TARGET.p.id
+        let { clickedElementId } = body
+        // ^ would be the commitment id. 
+        axios.get("/getClickedCommitment", body)
+
+        .then(populateEditModal(res.data))
+        .catch(err => console.log(err))
+
+        document.querySelector(".editModal").style.display = "flex"
+})
+
+//Listen for complete to be clicked
+pastCommitmentCard.querySelector(".complete").addEventListener("click", function(e) {
+    markComplete()
+})
+
+    commitmentContainer.appendChild(pastCommitmentCard)
 }
 function makeCommitmentCard(commitment) {
     const { id, name, date, amount, userId} = commitment
     const commitmentContainer = document.querySelector(".allCommitments")
 
     const commitmentCard = 
-    `<div id="${userId} class="commitment">
+    `<div id="${userId}" class="commitment">
     <p id="${id} class="commitmentName">${name}</p>
     <p class="commitmentAmount">${amount}</p>
     <p>DUE ON</p>
@@ -103,13 +104,13 @@ function makeCommitmentCard(commitment) {
     commitmentContainer.innerHTML += commitmentCard;
 }
 function getAllCommitments() {
-    axios.get("/commitments")
+    axios.get("http://localhost:3737/commitments/1")
     .then((res) => {
             let allCommitments = res.data
             const today = new Date()
         
             for(let i = 0; i < allCommitments.length; i++) {
-                if (date[i] < today) {
+                if (new Date(allCommitments[i].date) < today) {
                     makePastCommitmentCard(allCommitments[i]);
                 } else {
                     makeCommitmentCard(allCommitments[i]);
@@ -120,7 +121,7 @@ function getAllCommitments() {
 }
 
 //Code to Create Commitments
-function createCommitment(name, date, amount, isPaid, notes, userId) { 
+function createCommitment() { 
     let name = document.querySelector(".nameInput").value;
     let date = document.querySelector(".dateInput").value;
     let amount = document.querySelector(".currencyInput").value;
@@ -128,7 +129,7 @@ function createCommitment(name, date, amount, isPaid, notes, userId) {
     let isPaid = 1
     let userId = currentUserId
 
-    let { name, date, amount, notes, isPaid, userId } = body
+    let body = { name, date, amount, notes, isPaid, userId };
     axios.put("/createCommitment", body)
 
     .then(getAllCommitments())
@@ -136,13 +137,13 @@ function createCommitment(name, date, amount, isPaid, notes, userId) {
 }
 
 //Code to Update Commitments 
-function updateCommitment(name, date, amount, notes, clickedElementId, currentUserId) {
+function updateCommitment(clickedElementId) {
     let name = document.querySelector(".newNameInput").value;
     let date = document.querySelector(".newDateInput").value;
     let amount = document.querySelector(".newCurrencyInput").value;
     let notes = document.querySelector(".newNoteInput").value;
 
-    let { name, date, amount, notes, clickedElementId, currentUserId } = body
+    let body = { name, date, amount, notes, clickedElementId, currentUserId }
     axios.post("/updateCommitment", body)
 
     .then(getAllCommitments())
@@ -150,10 +151,9 @@ function updateCommitment(name, date, amount, notes, clickedElementId, currentUs
 }
 
 //Code to mark a Commitment as Complete and remove it from the DOM.
-function markComplete(commitmentId, date, amount, currentUserId) {
+function markComplete(commitmentId) {
 //TODO how do I grab the classes of the commitment they grabbed to get their inputs..
-    let isPaid = 0
-    let { commitmentId, date, amount, currentUserId } = body
+    let body = { commitmentId, currentUserId }
 
     axios.post("/markCommitmentComplete", body)
 
@@ -163,7 +163,7 @@ function markComplete(commitmentId, date, amount, currentUserId) {
 
 //Code to Delete Commitments
 function deleteCommitment(clickedElementId) {
-    let { clickedElementId } = body
+    let body = { clickedElementId };
 
     axios.delete("/deleteCommitment", body)
 

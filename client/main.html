@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head class="currentUserId" id="0">
+  <head class="currentUserId" id="1">
     <link rel="stylesheet" href="mainStyles.css" />
     <link rel="shortcut icon" type="image/png" href="../pictures/Logo.png" />
     <meta charset="UTF-8" />
@@ -47,22 +47,7 @@
         <button class="addButton" id="addButton" type="button"><span class="addHover"></span>ADD COMMITMENT</button>
       </div>
       
-      <div class="allCommitments">
-        <!-- TODO remove this code before final push. -->
-      <div class="commitment">
-        <p class="commitmentName">Commitment Name</p>
-        <p class="commitmentAmount">100.00</p>
-        <p>DUE ON</p>
-        <p class="commitmentDate">2022-12-20</p>
-          <div class="rightCommitmentSection">
-            <select class="paidSelector" name="paidSelector" id="paidSelector">
-              <option value="incomplete">incomplete</option>
-              <option class="complete" value="complete">complete</option>
-            </select>
-            <i id="1" class="arrow down"></i>
-          </div>
-        </div>
-      </div>
+      <div class="allCommitments"></div>
     </container>
 
         <!-- View/Edit Commitment Pop-up -->
@@ -89,7 +74,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="main.js"></script>
-    <script src="login.js"></script>
     <script src="stat.js"></script>
   </body>
 </html>

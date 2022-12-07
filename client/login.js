@@ -1,6 +1,3 @@
-const bcrypt = require("bcrypt");
-const axios = require("axios").default;
-
 //Login Button
 document.getElementById("loginButton").addEventListener("click", function() {
     checkLogin()
@@ -23,11 +20,11 @@ document.querySelector(".signupButton").addEventListener("click", function() {
 });
 
 //Code to Create Users
-function createUsers(username, password) { 
+function createUsers() { 
     let username = document.querySelector(".usernameInput").value;
     let password = bcrypt.hashSync(document.querySelector(".passwordInput").value);
 
-    let { username, password } = body
+    let body = { username, password }
     axios.put("/createUser", body)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
@@ -35,12 +32,11 @@ function createUsers(username, password) {
 }
 
 //Code to Check Login Info
-function checkLogin(username, password) { 
+async function checkLogin() { 
     let username = document.querySelector(".loginUsernameInput").value;
     let password = bcrypt.hashSync(document.querySelector(".loginPasswordInput").value);
 
-    axios.get("/checkLogin")
-    let userArray = [resp.data]
+    let { data: userArray } = await axios.get("/checkLogin");
 
     for(let i = 0; i < userArray.length; i++) {
         if(userArray[i].username === username && userArray[i].password === password){

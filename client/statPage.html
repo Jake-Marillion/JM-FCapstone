@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head class="currentUserId" id="0">
+  <head class="currentUserId" id="1">
     <link rel="stylesheet" href="statStyles.css" />
     <link rel="shortcut icon" type="image/png" href="../pictures/Logo.png">
     <meta charset="UTF-8" />
@@ -37,112 +37,8 @@
       </div>
     </div>
 
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/chart.js"
-    ></script>
-    <script>
-      //Doughtnut Chart
-      // setup
-      const dataDoughnut = {
-        labels: ['Current Month:'],
-      datasets: [{
-        label: ' % Paid',
-        data: [50, 50],
-        backgroundColor: [
-          'rgba(2, 169, 27, 1)',
-          'rgba(75, 75, 75, 0.2)'
-        ],
-        borderColor: [
-          'rgba(2, 169, 27, 1)',
-          'rgba(0, 0, 0, 0.2)'
-        ],
-        borderWidth: 1
-          },
-        ],
-      };
-
-      // config
-      const configDoughnut = {
-        type: "doughnut",
-        data: dataDoughnut,
-        options: {
-          circumference: 180,
-        rotation: 270,
-        cutout: "80%",
-        aspectRatio: 1,
-        plugins: {
-          legend: {
-            display: true
-          },
-          tooltip: {
-            filter: (tooltipItem) => {
-              return tooltipItem.dataIndex === 0
-            }
-          }
-        }
-        },
-      };
-
-      // render init block
-      const myChartDoughnut = new Chart(
-        document.getElementById("myChartDoughnut"),
-        configDoughnut
-      );
-
-      //Bar Chart
-      // setup
-      const data = {
-        labels: ["January","February","March","April","May","June","July","August","September","October","November","December",],
-        datasets: [{
-            label: "Year Review",
-            data: [
-              1800, 1200, 600, 900, 1200, 300, 900, 900, 1900, 200, 800, 1000,
-            ],
-            backgroundColor: [
-              "rgba(255, 26, 104, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.45)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-              "rgba(0, 0, 0, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 26, 104, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(0, 0, 0, 1)",
-            ],
-            borderWidth: 1,
-          },
-        ],
-      };
-
-      // config
-      const config = {
-        type: "bar",
-        data,
-        options: {
-          aspectRatio: 1,
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      };
-
-      // render init block
-      const myChart = new Chart(document.getElementById("myChart"), config);
-    </script>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="stat.js"></script>
-    <script src="login.js"></script>
-    <script src="main.js"></script>
   </body>
 </html>
