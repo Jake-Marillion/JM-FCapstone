@@ -241,6 +241,31 @@ function checkAndDelete() {
         currentYear + 1
     }
 }
+
+//Code to set Current User Id in Database
+const establishCurrentUser = (req, res) => {
+    let { userId } = req.body
+
+    sequelize.query(`delete * from currentUser then insert into currentUser (id) values (${userId});`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+//Endpoint
+app.put('/establishUser', establishCurrentUser)
+
+//Code to get Current User Id
+const getCurrentUser = (req, res) => {
+
+    sequelize.query(`select * from currentUser;`)
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
+}
+//Endpoint
+app.get('/getCurrentUserId', getCurrentUser)
+
+
 checkAndDelete()
 
 //Code to seed Admin User
@@ -263,6 +288,10 @@ app.post('/seed', (req, res) => {
         isPaid BOOLEAN NOT NULL,
         notes VARCHAR(1000),
         userid INTEGER REFERENCES users(id)
+    );
+
+    CREATE TABLE currentUser (
+        id INT
     );
     
     INSERT INTO users (username, password)
@@ -307,7 +336,9 @@ module.exports = {
     getOctValues,
     getNovValues,
     getDecValues,
-    getClickedCommitment
+    getClickedCommitment,
+    establishCurrentUser,
+    getCurrentUser
 }; 
 
 app.listen(3737, () => console.log(`Server running on ${PORT}`));

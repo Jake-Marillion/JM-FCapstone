@@ -1,8 +1,19 @@
 const baseURL = 'http://localhost:3737'
 
+//Code to get and set current user variable
+let currentUserId = 0
+function getCurrentUser() {
+
+    axios.get("/getCurrentUserId")
+
+    .then(currentUserId = res.id)
+    .catch(err => console.log(err))
+}
+getCurrentUser()
+
 //Sets Bar Graph Values
 async function setBarValues() {
-    let body = { currentUserId: 1 }
+    let body = { currentUserId }
     let thisYearsStats = []
 
     let jan =  axios.post(baseURL + "/janValues", body);
@@ -76,7 +87,7 @@ async function setBarValues() {
 function setDonutValues() {
     let thisMonthUnpaidCommitments = 50
     let thisMonthPaidCommitments = 50
-    let body = {currentUserId: 1}
+    let body = { currentUserId }
     let totalMoney = 0
 
     axios.post(baseURL + "/getTotalValues", body)

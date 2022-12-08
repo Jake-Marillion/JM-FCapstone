@@ -35,15 +35,27 @@ function createUsers() {
 async function checkLogin() { 
     let username = document.querySelector(".loginUsernameInput").value;
     let password = bcrypt.hashSync(document.querySelector(".loginPasswordInput").value);
+    console.log(password)
+    console.log(username)
 
     let { data: userArray } = await axios.get("/checkLogin");
 
     for(let i = 0; i < userArray.length; i++) {
         if(userArray[i].username === username && userArray[i].password === password){
-            document.querySelectorAll(".currentUserId").id = `${userArray[i].id}`
-            window.location.href = "../main.html"
+            login(userArray[i].id)
         } else {
             alert("User not found!");
         }
+    }
+    async function login(userId) {
+    let body = { userId }
+
+    axios.put("/establishUser", body)
+
+    window.location.href = "../main.html"
+    // or await window.location.assign("../main.html")?
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
     }
 }

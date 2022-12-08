@@ -1,3 +1,14 @@
+//Code to get and set current user variable
+let currentUserId = 0
+function getCurrentUser() {
+
+    axios.get("/getCurrentUserId")
+
+    .then(currentUserId = res.id)
+    .catch(err => console.log(err))
+}
+getCurrentUser()
+
 //Add Commitment Button
 document.getElementById("addButton").addEventListener("click", function() {
     document.querySelector(".popModal").style.display = "flex"
@@ -16,7 +27,6 @@ document.querySelector(".submitButton").addEventListener("click", function() {
 
 //Logout Button.
 document.querySelector(".logOut").addEventListener("click", function() {
-    document.querySelectorAll(".currentUserId").id = "0"
     window.location.href = "../login.html"
 });
 
@@ -38,7 +48,6 @@ document.querySelector(".deleteButton").addEventListener("click", function(e) {
 });
 
 const allCommitments = document.querySelector(".allCommitments")
-const currentUserId = document.querySelector(".currentUserId").id
 let clickedElementId = 0
 
 //Code that makes HTML Commitments w red borders if date is past and green if not.
@@ -65,8 +74,7 @@ function makePastCommitmentCard(commitment) {
     //Down Arrow Button on Divs
     pastCommitmentCard.querySelector(".arrow").addEventListener("click", function () {
         clickedElementId = Event.AT_TARGET.p.id
-        let { clickedElementId } = body
-        // ^ would be the commitment id. 
+        let { clickedElementId } = body 
         axios.get("/getClickedCommitment", body)
 
         .then(populateEditModal(res.data))
@@ -135,7 +143,6 @@ function createCommitment() {
 
     let body = { name, date, amount, notes, isPaid, userId };
     axios.put("/createCommitment", body)
-    //TODO do I need to call getAllCommitments here like I am??
     .then(getAllCommitments())
     .catch(err => console.log(err))
 }
@@ -159,7 +166,7 @@ function markComplete(commitmentId) {
     let body = { commitmentId }
 
     axios.post("/markCommitmentComplete", body)
-    //TODO do I need to call getAllCommitments here like I am??
+
     .then(getAllCommitments())
     .catch(err => console.log(err))
 }
