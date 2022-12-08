@@ -273,6 +273,7 @@ app.post('/seed', (req, res) => {
     sequelize.query(`
     drop table if exists commitments;
     drop table if exists users;
+    drop table if exists currentUser;
 
     CREATE TABLE users (
         id SERIAL PRIMARY KEY,
