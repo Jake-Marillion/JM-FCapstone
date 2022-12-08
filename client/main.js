@@ -4,7 +4,7 @@ function getCurrentUser() {
 
     axios.get("/getCurrentUserId")
 
-    .then(currentUserId = res.id)
+    .then(currentUserId = res.data.id)
     .catch(err => console.log(err))
 }
 getCurrentUser()
