@@ -311,6 +311,9 @@ app.post('/seed', (req, res) => {
     ('Misc', '2022-12-12', 50.60, true, NULL, 1),
     ('Eating Out', '2022-12-17', 45.86, true, NULL, 1),
     ('Christmas', '2022-12-09', 300.80, false, NULL, 1);
+
+    INSERT INTO currentUser (id)
+    VALUES ('1');
 `).then(() => res.sendStatus(200))
 .catch((e) => res.status(500).send(e.message))
 })
