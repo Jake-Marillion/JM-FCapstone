@@ -73,12 +73,10 @@ function makePastCommitmentCard(commitment) {
 
     //Down Arrow Button on Divs
     pastCommitmentCard.querySelector(".arrow").addEventListener("click", function () {
-        clickedElementId = Event.AT_TARGET.p.id
-        let { clickedElementId } = body 
-        axios.get("/getClickedCommitment", body)
 
-        .then(populateEditModal(res.data))
-        .catch(err => console.log(err))
+        let clickedElementId = Event.AT_TARGET.p.id;
+
+        populateEditModal(clickedElementId)
 
         document.querySelector(".editModal").style.display = "flex"
 })
@@ -182,12 +180,18 @@ function deleteCommitment(clickedElementId) {
 }
 
 //Code to populate the Edit Popup
-function populateEditModal(){
+function populateEditModal(clickedElementId){
+    
+    axios.post("/getClickedCommitment", body)
+
     let { name, date, amount, notes } = res.data
     document.querySelector(".newNameInput").input = name
     document.querySelector(".newDateInput").input = date
     document.querySelector(".newCurrencyInput").input = amount
     document.querySelector(".newNoteInput").input = notes
+
+    .then(dbRes => res.status(200).send(dbRes[0]))
+    .catch(err => console.log(err))
 }
 
 getAllCommitments()
