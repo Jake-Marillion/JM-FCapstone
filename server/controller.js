@@ -221,9 +221,9 @@ app.post('/decValues', getDecValues)
 
 //Code to get info for Edit Popup
 const getClickedCommitment = (req, res) => {
-    let { commitmentId } = req.body
+    let { clickedElementId } = req.body
 
-    sequelize.query(`select name, date, amount, notes from commitments where id = ${commitmentId};`)
+    sequelize.query(`select name, date, amount, notes from commitments where id = ${clickedElementId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))

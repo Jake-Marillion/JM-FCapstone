@@ -178,21 +178,21 @@ function deleteCommitment(clickedElementId) {
 }
 
 //Code to populate the Edit Popup
-function populateEditModal(clickedElementId){
+async function populateEditModal(clickedElementId){
 
     let body = { clickedElementId };
     axios.post("/getClickedCommitment", body)
+    .then(populate(res.data))
 
     document.querySelector(".editModal").style.display = "flex"
 
-    let { name, date, amount, notes } = res.data
-    document.querySelector(".newNameInput").input = name
-    document.querySelector(".newDateInput").input = date
-    document.querySelector(".newCurrencyInput").input = amount
-    document.querySelector(".newNoteInput").input = notes
-
-    .then(dbRes => res.status(200).send(dbRes[0]))
-    .catch(err => console.log(err))
+    function populate(data) {
+        let { name, date, amount, notes } = data
+        document.querySelector(".newNameInput").input = name
+        document.querySelector(".newDateInput").input = date
+        document.querySelector(".newCurrencyInput").input = amount
+        document.querySelector(".newNoteInput").input = notes
+    }
 }
 
 getAllCommitments()
