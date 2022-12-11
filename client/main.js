@@ -77,8 +77,6 @@ function makePastCommitmentCard(commitment) {
         let clickedElementId = Event.AT_TARGET.p.id;
 
         populateEditModal(clickedElementId)
-
-        document.querySelector(".editModal").style.display = "flex"
 })
 
 //Listen for complete to be clicked
@@ -181,8 +179,11 @@ function deleteCommitment(clickedElementId) {
 
 //Code to populate the Edit Popup
 function populateEditModal(clickedElementId){
-    
+
+    let body = { clickedElementId };
     axios.post("/getClickedCommitment", body)
+
+    document.querySelector(".editModal").style.display = "flex"
 
     let { name, date, amount, notes } = res.data
     document.querySelector(".newNameInput").input = name
