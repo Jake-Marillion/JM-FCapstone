@@ -52,7 +52,6 @@ let clickedElementId = 0
 function makePastCommitmentCard(commitment) {
     const { id, name, date, amount, userId} = commitment
     const commitmentContainer = document.querySelector(".allCommitments")
-    
     const pastCommitmentCard = document.createElement('div');
     pastCommitmentCard.className = "pastCommitment"
     pastCommitmentCard.id = userId;
@@ -80,14 +79,16 @@ function makePastCommitmentCard(commitment) {
         markComplete(clickedElementId)
     })
     
-    commitmentContainer.appendChild(pastCommitmentCard)
+    commitmentContainer.appendChild(pastCommitmentCard);
 }
 function makeCommitmentCard(commitment) {
     const { id, name, date, amount, userId} = commitment
     const commitmentContainer = document.querySelector(".allCommitments")
-    
-    const commitmentCard = 
-    `<div id="${userId}" class="commitment">
+    const commitmentCard = document.createElement('div');
+    commitmentCard.id = userId;
+    commitmentCard.className = 'commitment';
+    commitmentCard.innerHTML =
+    `
     <p id="${id} class="commitmentName">${name}</p>
     <p class="commitmentAmount">${amount}</p>
     <p>DUE ON</p>
@@ -98,10 +99,9 @@ function makeCommitmentCard(commitment) {
     <option class="complete" value="complete">complete</option>
     </select>
     <i" class="arrow down"></i>
-    </div>
     </div>`
 
-    //Down Arrow Button on Divs
+    //Down Arrow Button on Commitments
     commitmentCard.querySelector(".arrow").addEventListener("click", function () {
         populateEditModal(id)
     })
@@ -112,12 +112,11 @@ function makeCommitmentCard(commitment) {
         markComplete(clickedElementId)
     })
     
-    commitmentContainer.innerHTML += commitmentCard;
+    commitmentContainer.appendChild(commitmentCard);
 }
 
 //Code to get and filter/sort Commitments
 function getAllCommitments() {
-    //TODO this URL is hardcoded for user 1.  
     axios.get(`http://localhost:3737/commitments/${currentUserId}`)
     .then((res) => {
             let allCommitments = res.data
@@ -145,7 +144,13 @@ function createCommitment() {
     
     let body = { name, date, amount, notes, isPaid, userId };
     axios.post(`${BASE_URL}/createCommitment`, body)
-    .then(getAllCommitments)
+    .then(() => {
+        document.querySelector(".nameInput").value = ''
+        document.querySelector(".dateInput").value = ''
+        document.querySelector(".currencyInput").value = ''
+        document.querySelector(".noteInput").value = ''
+        getAllCommitments}
+        )
     .catch(err => console.log(err))
 }
 
