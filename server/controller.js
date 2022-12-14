@@ -5,6 +5,7 @@ const {CONNECTION_STRING} = process.env;
 const {PORT} = process.env;
 const axios = require('axios').default;
 const Sequelize = require('sequelize');
+const bcrypt = require('bcryptjs');
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -33,7 +34,7 @@ app.get('/commitments/:id', getCommitments)
 const createCommitment = (req, res) => {
     let { name, date, amount, notes, isPaid, userId } = req.body
    
-    sequelize.query(`insert into commitments (name, date, amount, isPaid, notes, userID) values (${name}, ${date}, ${amount}, ${isPaid}, ${notes}, ${userId};`)
+    sequelize.query(`insert into commitments (name, date, amount, isPaid, notes, userID) values ('${name}', '${date}', ${amount}, ${isPaid}, '${notes}', ${userId});`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -45,8 +46,7 @@ app.post('/createCommitment', createCommitment)
 const updateCommitment = (req, res) => {
     let { name, date, amount, notes, commitmentId } = req.body
 
-    sequelize.query(`update commitments set name=${name}, set date=${date}, set amount=${amount}, set notes=${notes} where ${commitmentId}=commitments.id;`)
-
+    sequelize.query(`update commitments set name='${name}', date='${date}', amount=${amount}, notes='${notes}' where id=${commitmentId};`)
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
@@ -57,7 +57,7 @@ app.post('/updateCommitment', updateCommitment)
 const markCommitmentComplete = (req, res) => {
     let { commitmentId } = req.body
 
-    sequelize.query(`update commitments set isPaid=true where ${commitmentId}=commitments.id;`)
+    sequelize.query(`update commitments set isPaid=true where id=${commitmentId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -67,38 +67,45 @@ app.post('/markCommitmentComplete', markCommitmentComplete)
 
 //Function to delete commitments
 const deleteCommitment = (req, res) => {
-    let { clickedElementId } = req.body
+    let { id } = req.params
     
-    sequelize.query(`delete * from commitments where id=${clickedElementId};`)
+    sequelize.query(`delete from commitments where id=${id};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
 //Endpoint
-app.delete('/deleteCommitment', deleteCommitment)
+app.delete('/deleteCommitment/:id', deleteCommitment)
 
 //Function to create users
 const createUser = (req, res) => {
     let { username, password } = req.body
-
-    sequelize.query(`insert into users (username, password) values (${username}, ${password});`)
-
+    password = bcrypt.hashSync(password);
+    sequelize.query(`insert into users (username, password) values ('${username}', '${password}');`)
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
 }
 //Endpoint
-app.put('/createUser', createUser)
+app.post('/createUser', createUser)
 
-//Funtion to check login info
+//Function to check login info
 const checkLogin = (req, res) => {
-    
-    sequelize.query(`select * from users;`)
-    
-    .then(dbRes => res.status(200).send(dbRes[0]))
+    const { username, password } = req.body
+    sequelize.query(`select * from users where username='${username}';`)
+    .then(dbRes => {
+        if(dbRes[0][0] && bcrypt.compareSync(password, dbRes[0][0].password)){
+            sequelize.query(`delete from currentUser where id IS NOT NULL;
+                insert into currentUser (id) values (${ dbRes[0][0].id});`).then(() => {
+                    res.status(200).send(dbRes[0])
+                }).catch(e => console.log(e))
+        } else {
+            res.status(500).send('Incorrect credentials')
+        }
+    })
     .catch(err => console.log(err))
 }
 //Endpoint
-app.get('/checkLogin', checkLogin)
+app.post('/checkLogin', checkLogin)
 
 //Functions to get Doughnut Values
 const doughnutValues = (req, res) => {
@@ -221,9 +228,9 @@ app.post('/decValues', getDecValues)
 
 //Code to get info for Edit Popup
 const getClickedCommitment = (req, res) => {
-    let { clickedElementId } = req.body
+    let { commitmentId } = req.body
 
-    sequelize.query(`select name, date, amount, notes from commitments where id = ${clickedElementId};`)
+    sequelize.query(`select name, date, amount, notes from commitments where id = ${commitmentId};`)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -241,18 +248,6 @@ function checkAndDelete() {
         currentYear + 1
     }
 }
-
-//Code to set Current User Id in Database
-const establishCurrentUser = (req, res) => {
-    let { userId } = req.body
-
-    sequelize.query(`delete * from currentUser then insert into currentUser (id) values (${userId});`)
-
-    .then(dbRes => res.status(200).send(dbRes[0]))
-    .catch(err => console.log(err))
-}
-//Endpoint
-app.put('/establishUser', establishCurrentUser)
 
 //Code to get Current User Id
 const getCurrentUser = (req, res) => {
@@ -341,7 +336,6 @@ module.exports = {
     getNovValues,
     getDecValues,
     getClickedCommitment,
-    establishCurrentUser,
     getCurrentUser
 }; 
 

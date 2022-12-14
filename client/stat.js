@@ -2,20 +2,18 @@ const baseURL = 'http://localhost:3737'
 
 //Code to get and set current user variable
 let currentUserId = 0
-function getCurrentUser() {
+const BASE_URL = 'http://localhost:3737'
 
-    axios.get("/getCurrentUserId")
-
-    .then(currentUserId = res.data.id)
-    .catch(err => console.log(err))
-}
-getCurrentUser()
+//Logout Button.
+document.querySelector(".logOut").addEventListener("click", function() {
+  window.location.href = "./login.html"
+});
 
 //Sets Bar Graph Values
 async function setBarValues() {
     let body = { currentUserId }
     let thisYearsStats = []
-
+    
     let jan =  axios.post(baseURL + "/janValues", body);
     let feb =  axios.post(baseURL + "/febValues", body);
     let mar =  axios.post(baseURL + "/marValues", body);
@@ -30,16 +28,16 @@ async function setBarValues() {
     let dec =  axios.post(baseURL + "/decValues", body);
 
     const monthRes = await Promise.all([jan, feb, mar, apr, may, jun, jul, aug, sept, oct, nov, dec])
-
+    
     monthRes.forEach(res => thisYearsStats.push(res.data[0].sum));
     console.log({ thisYearsStats });
-
+    
     //Bar Chart
     // setup
     const data = {
       labels: ["January","February","March","April","May","June","July","August","September","October","November","December",],
       datasets: [{
-          label: "Year Review",
+        label: "Year Review",
           data: thisYearsStats,
           backgroundColor: [
             "rgba(255, 26, 104, 0.2)",
@@ -63,7 +61,7 @@ async function setBarValues() {
         },
       ],
     };
-
+    
     // config
     const config = {
       type: "bar",
@@ -77,81 +75,89 @@ async function setBarValues() {
         },
       },
     };
-
+    
     // render init block
     const myChart = new Chart(document.getElementById("myChart"), config);
-
-}
-
-//Sets Donut Graph Values
-function setDonutValues() {
+    
+  }
+  
+  //Sets Donut Graph Values
+  function setDonutValues() {
     let thisMonthUnpaidCommitments = 50
     let thisMonthPaidCommitments = 50
     let body = { currentUserId }
     let totalMoney = 0
-
+    
     axios.post(baseURL + "/getTotalValues", body)
     .then((res) => {
-        console.log(res.data)
-        totalMoney = res.data[0].sum 
-        axios.post(baseURL + "/getDoughnutValues", body)
-        .then(({ data }) => {
-            thisMonthPaidCommitments = data[0].sum * 100 / totalMoney
-            thisMonthUnpaidCommitments = 100 - thisMonthPaidCommitments 
-            
-    // Doughtnut Chart
-    // setup
-    console.log([thisMonthUnpaidCommitments, thisMonthPaidCommitments])
-    const dataDoughnut = {
-        labels: ['Current Month:'],
-      datasets: [{
-        label: ' % Paid',
-        data:  [thisMonthUnpaidCommitments, thisMonthPaidCommitments],
-        backgroundColor: [
-          'rgba(2, 169, 27, 1)',
-          'rgba(75, 75, 75, 0.2)'
-        ],
-        borderColor: [
-          'rgba(2, 169, 27, 1)',
-          'rgba(0, 0, 0, 0.2)'
-        ],
-        borderWidth: 1
+      console.log(res.data)
+      totalMoney = res.data[0].sum 
+      axios.post(baseURL + "/getDoughnutValues", body)
+      .then(({ data }) => {
+        thisMonthPaidCommitments = data[0].sum * 100 / totalMoney
+        thisMonthUnpaidCommitments = 100 - thisMonthPaidCommitments 
+        
+        // Doughtnut Chart
+        // setup
+        console.log([thisMonthUnpaidCommitments, thisMonthPaidCommitments])
+        const dataDoughnut = {
+          labels: ['Current Month:'],
+          datasets: [{
+            label: ' % Paid',
+            data:  [thisMonthUnpaidCommitments, thisMonthPaidCommitments],
+            backgroundColor: [
+              'rgba(2, 169, 27, 1)',
+              'rgba(75, 75, 75, 0.2)'
+            ],
+            borderColor: [
+              'rgba(2, 169, 27, 1)',
+              'rgba(0, 0, 0, 0.2)'
+            ],
+            borderWidth: 1
           },
         ],
       };
-  
+      
       // config
       const configDoughnut = {
         type: "doughnut",
         data: dataDoughnut,
         options: {
           circumference: 180,
-        rotation: 270,
-        cutout: "80%",
-        aspectRatio: 1,
-        plugins: {
-          legend: {
-            display: true
-          },
-          tooltip: {
-            filter: (tooltipItem) => {
-              return tooltipItem.dataIndex === 0
+          rotation: 270,
+          cutout: "80%",
+          aspectRatio: 1,
+          plugins: {
+            legend: {
+              display: true
+            },
+            tooltip: {
+              filter: (tooltipItem) => {
+                return tooltipItem.dataIndex === 0
+              }
             }
           }
-        }
         },
       };
-  
+      
       // render init block
       const myChartDoughnut = new Chart(
         document.getElementById("myChartDoughnut"),
         configDoughnut
-      );
+        );
+      })
+      .catch(err => console.log(err))
+      
     })
-    .catch(err => console.log(err))
-
-    })
-}
-
-setBarValues()
-setDonutValues()
+  }
+  function getCurrentUser() {
+  
+      axios.get(`${BASE_URL}/getCurrentUserId`)
+      .then((res) => {
+        currentUserId = res.data[0].id
+        setBarValues()
+        setDonutValues()
+      })
+      .catch(err => console.log(err))
+  }
+  getCurrentUser()

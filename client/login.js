@@ -1,5 +1,6 @@
 //Login Button
-document.getElementById("loginButton").addEventListener("click", function() {
+document.getElementById("loginButton").addEventListener("click", function(e) {
+    e.preventDefault()
     checkLogin()
 });
 
@@ -22,10 +23,10 @@ document.querySelector(".signupButton").addEventListener("click", function() {
 //Code to Create Users
 function createUsers() { 
     let username = document.querySelector(".usernameInput").value;
-    let password = bcrypt.hashSync(document.querySelector(".passwordInput").value);
+    let password = document.querySelector(".passwordInput").value;
 
     let body = { username, password }
-    axios.put("/createUser", body)
+    axios.post("http://localhost:3737/createUser", body)
 
     .then(dbRes => res.status(200).send(dbRes[0]))
     .catch(err => console.log(err))
@@ -34,28 +35,13 @@ function createUsers() {
 //Code to Check Login Info
 async function checkLogin() { 
     let username = document.querySelector(".loginUsernameInput").value;
-    let password = bcrypt.hashSync(document.querySelector(".loginPasswordInput").value);
+    let password = document.querySelector(".loginPasswordInput").value;
     console.log(password)
     console.log(username)
-
-    let { data: userArray } = await axios.get("/checkLogin");
-
-    for(let i = 0; i < userArray.length; i++) {
-        if(userArray[i].username === username && userArray[i].password === password){
-            login(userArray[i].id)
-        } else {
-            alert("User not found!");
-        }
-    }
-    async function login(userId) {
-    let body = { userId }
-
-    axios.put("/establishUser", body)
-
-    window.location.href = "../main.html"
-    // or await window.location.assign("../main.html")?
-
-    .then(dbRes => res.status(200).send(dbRes[0]))
-    .catch(err => console.log(err))
+    try{
+        let { data: userArray } = await axios.post("http://localhost:3737/checkLogin", {username, password});
+        window.location.href = "./main.html"
+    } catch(e){
+        alert('please check credentials and try again');
     }
 }
