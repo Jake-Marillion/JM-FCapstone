@@ -100,6 +100,17 @@ function makeCommitmentCard(commitment) {
     <i" class="arrow down"></i>
     </div>
     </div>`
+
+    //Down Arrow Button on Divs
+    commitmentCard.querySelector(".arrow").addEventListener("click", function () {
+        populateEditModal(id)
+    })
+    
+    //Listen for complete to be clicked
+    commitmentCard.querySelector(".paidSelector").addEventListener("change", function(e) {
+        clickedElementId = e.target.name
+        markComplete(clickedElementId)
+    })
     
     commitmentContainer.innerHTML += commitmentCard;
 }
