@@ -1,7 +1,7 @@
 # Foundations-Capstone
 Full Stack Foundations Capstone Website From DevMountain iOS Coding Bootcamp
 
-Youtube Link to video explaining project: 
+Youtube Link to video explaining project: https://www.youtube.com/watch?v=4l2JZlxLnEY
 
 Hi!  I created this project so anyone would be able to track their bills/commitments and easily see certain statistics about their
 
